@@ -4,6 +4,7 @@ bootstrap-sortable
 adding sorting ability to bootstrap table
 
 In fact, it can be used for any tables.
+
 This project is inspired by HTML Kickstart (http://www.99lime.com/elements/) and its sortable table. I took the css and js part from there and stripped the unnecessary formating related to Kickstart.
 
 Using:
