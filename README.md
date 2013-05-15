@@ -11,4 +11,4 @@ Using:
 
 Add references to bootstrap-sortable.css and bootstrap-sortable.js to your page. Add class "sortable" to your bootstrap table.
 
-When you add table rows or whole table from client side, use ApplySortability() function to add sortability to parts/tables that were not present at document.ready
+When you add table rows or whole table from client side, use `$.bootstrapSortable()` function to add sortability to parts/tables that were not present at document.ready
