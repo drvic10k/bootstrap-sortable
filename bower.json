@@ -1,0 +1,13 @@
+{
+    "name": "bootstrap-sortable",
+    "version": "1.1.2",
+    "author": "drvic10k",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/drvic10k/bootstrap-sortable"
+    },
+    "main": ["./css/bootstrap-sortable.css", "./js/bootstrap-sortable.js"],
+    "dependencies": {
+        "jquery": ">= 1.7.1"
+    }
+}
