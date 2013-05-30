@@ -12,6 +12,7 @@
       var $this = $(this);
       $this.find('thead th').each(function (index) { $(this).attr('data-sortkey', index); });
       $this.find('th,td').each(function () { var $this = $(this); $this.attr('data-value') === undefined && $this.attr('data-value', $this.text()); });
+      $this.find('thead th').each(function (index) { var $this = $(this); bsSort[index] = $this.attr('data-defaultsort'); if(bsSort[index] != null){bsSort[index] = bsSort[index] == 'asc' ? 'desc' : 'asc'; $this.click(); }}); });
     });
   };
 
