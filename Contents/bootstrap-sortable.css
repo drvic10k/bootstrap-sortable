@@ -1,5 +1,4 @@
-﻿table.sortable span.arrow
-{
+﻿table.sortable span.arrow {
     border-style: solid;
     border-width: 5px;
     display: block;
@@ -14,21 +13,22 @@
     margin-top: -2px;
 }
 
-    table.sortable span.arrow.up
-    {
+    table.sortable span.arrow.up {
         border-color: transparent transparent #ccc transparent;
         margin-top: -7px;
     }
 
-table.sortable thead th
-{
+table.sortable thead th {
     cursor: pointer;
     position: relative;
     top: 0;
     left: 0;
 }
 
-    table.sortable thead th:hover
-    {
+    table.sortable thead th:hover {
         background: #efefef;
+    }
+
+    table.sortable thead th div.mozilla {
+        position:relative;
     }

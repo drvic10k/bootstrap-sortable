@@ -1,6 +1,6 @@
 bootstrap-sortable
 ==================
-Current version: 1.2.2
+Current version: 1.2.3
 
 adding sorting ability to bootstrap table
 
