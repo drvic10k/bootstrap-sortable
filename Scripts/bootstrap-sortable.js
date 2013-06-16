@@ -3,59 +3,76 @@
 
 (function ($) {
 
-    var $document = $(document),
-        bsSort = [];
+	var $document = $(document),
+        bsSort = [],
+    	lastSort;
 
-    $.bootstrapSortable = function () {
-        // set attributes needed for sorting
-        $('table.sortable').each(function () {
-            var $this = $(this);
-            $this.find('thead th').each(function (index) { $(this).attr('data-sortkey', index); });
-            $this.find('th,td').each(function () { var $this = $(this); $this.attr('data-value') === undefined && $this.attr('data-value', $this.text()); });
-            $this.find('thead th').each(function (index) { var $this = $(this); bsSort[index] = $this.attr('data-defaultsort'); if (bsSort[index] != null) { bsSort[index] = bsSort[index] == 'asc' ? 'desc' : 'asc'; $this.click(); } });
-        });
-    };
+	$.bootstrapSortable = function (applyLast) {
+		// set attributes needed for sorting
+		$('table.sortable').each(function () {
+			var $this = $(this);
+			applyLast = (applyLast === true);
+			$this.find('span.arrow').remove();
+			$this.find('thead th').each(function (index) {
+				$(this).attr('data-sortkey', index);
+			});
+			$this.find('th,td').each(function () {
+				var $this = $(this);
+				$this.attr('data-value') === undefined && $this.attr('data-value', $this.text());
+			});
+			$this.find('thead th').each(function (index) {
+				var $this = $(this);
+				lastSort = applyLast ? lastSort : -1;
+				bsSort[index] = applyLast ? bsSort[index] : $this.attr('data-defaultsort');
+				if (bsSort[index] != null && (applyLast == (index == lastSort))) {
+					bsSort[index] = bsSort[index] == 'asc' ? 'desc' : 'asc';
+					$this.click();
+				}
+			});
+		});
+	};
 
-    // add click event to table header
-    $document.on('click', 'table.sortable thead th', function (e) {
-        var $this = $(this), $table = $this.parents('table.sortable');
+	// add click event to table header
+	$document.on('click', 'table.sortable thead th', function (e) {
+		var $this = $(this), $table = $this.parents('table.sortable');
 
-        // update arrow icon
-        if ($.browser.mozilla) {
-            var moz_arrow = $table.find('div.mozilla');
-            if (moz_arrow != null) {
-                moz_arrow.parent().html(moz_arrow.text());
-            }
-            $this.wrapInner('<div class="mozilla"></div>');
-            $this.children().eq(0).append('<span class="arrow"></span>');
-        }
-        else {
-            $table.find('span.arrow').remove();
-            $this.append('<span class="arrow"></span>');
-        }
+		// update arrow icon
+		if ($.browser.mozilla) {
+			var moz_arrow = $table.find('div.mozilla');
+			if (moz_arrow != null) {
+				moz_arrow.parent().html(moz_arrow.text());
+			}
+			$this.wrapInner('<div class="mozilla"></div>');
+			$this.children().eq(0).append('<span class="arrow"></span>');
+		}
+		else {
+			$table.find('span.arrow').remove();
+			$this.append('<span class="arrow"></span>');
+		}
 
-        // sort direction
-        var nr = $this.attr('data-sortkey');
-        bsSort[nr] = bsSort[nr] == 'asc' ? 'desc' : 'asc';
-        if (bsSort[nr] == 'desc') { $this.find('span.arrow').addClass('up'); }
+		// sort direction
+		var nr = $this.attr('data-sortkey');
+		lastSort = nr;
+		bsSort[nr] = bsSort[nr] == 'asc' ? 'desc' : 'asc';
+		if (bsSort[nr] == 'desc') { $this.find('span.arrow').addClass('up'); }
 
-        // sort rows
-        var rows = $table.find('tbody tr');
-        rows.tsort('td:eq(' + nr + ')', { order: bsSort[nr], attr: 'data-value' });
-    });
+		// sort rows
+		var rows = $table.find('tbody tr');
+		rows.tsort('td:eq(' + nr + ')', { order: bsSort[nr], attr: 'data-value' });
+	});
 
-    // jQuery 1.9 removed this object
-    if (!$.browser) {
-        $.browser = { chrome: false, mozilla: false, opera: false, msie: false, safari: false };
-        var ua = navigator.userAgent;
-        $.each($.browser, function (c, a) {
-            $.browser[c] = ((new RegExp(c, 'i').test(ua))) ? true : false;
-            if ($.browser.mozilla && c == 'mozilla') { $.browser.mozilla = ((new RegExp('firefox', 'i').test(ua))) ? true : false; };
-            if ($.browser.chrome && c == 'safari') { $.browser.safari = false; };
-        });
-    };
+	// jQuery 1.9 removed this object
+	if (!$.browser) {
+		$.browser = { chrome: false, mozilla: false, opera: false, msie: false, safari: false };
+		var ua = navigator.userAgent;
+		$.each($.browser, function (c, a) {
+			$.browser[c] = ((new RegExp(c, 'i').test(ua))) ? true : false;
+			if ($.browser.mozilla && c == 'mozilla') { $.browser.mozilla = ((new RegExp('firefox', 'i').test(ua))) ? true : false; };
+			if ($.browser.chrome && c == 'safari') { $.browser.safari = false; };
+		});
+	};
 
-    // Initialise on DOM ready
-    $($.bootstrapSortable);
+	// Initialise on DOM ready
+	$($.bootstrapSortable);
 
 }(jQuery));
