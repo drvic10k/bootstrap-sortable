@@ -1,12 +1,13 @@
 bootstrap-sortable
 ==================
+adding sorting ability to bootstrap table  
 Current version: 1.3.0
-
-adding sorting ability to bootstrap table
 
 In fact, it can be used for any tables.
 
-Available for download with NuGet, search for `bootstrap-sortable`.
+Available for download with NuGet, search for `bootstrap-sortable`.  
+Working [demo](http://htmlpreview.github.io/?https://github.com/drvic10k/bootstrap-sortable/blob/master/Demo/index.html "Demo").
+
 
 ####Basic usage:
 
