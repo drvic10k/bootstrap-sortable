@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bootstrap Sortable Tables</title>
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-sortable.css">
+</head>
+<body>
+    <div class='container'>
+        <div class='hero-unit'>
+            <h1>Bootstrap Sortable</h1>
+            <p class='lead'>Javascript powered, sortable tables.</p>
+            <a href='https://github.com/drvic10k/bootstrap-sortable' class='btn btn-success'>See on GitHub</a>
+        </div>
+
+        <table class='table table-bordered table-striped sortable'>
+            <thead>
+                <tr>
+                    <th data-defaultsort='asc'>Name (Asc)</th>
+                    <th data-defaultsort='asc'>Awesome Rating (Asc)</th>
+                    <th data-defaultsort='desc'>Date (Desc)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td data-value='drvic10k'><a target="_blank" href="https://github.com/drvic10k">@drvic10k</a></td>
+                    <td>10</td>
+                    <td data-value='2013/03/03'>2013-03-03</td>
+                </tr>
+                <tr>
+                    <td data-value='jbrooksuk'><a target="_blank" href="https://github.com/jbrooksuk">@jbrooksuk</a></td>
+                    <td>9.5</td>
+                    <td data-value='2010/04/17'>2010-04-17</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class='well'>
+            <p>Sort by awesome rating descending, then clik on Add Row (auto sort).</p>
+            <button type='button' class='btn btn-primary add-row'>Add Row (no auto sort)</button>
+            <button type='button' class='btn btn-primary add-row' data-sort="true">Add Row (auto sort)</button>
+        </div>
+
+    </div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script src='js/bootstrap-sortable.js'></script>
+
+    <script>
+        (function () {
+            var tableRow = "<tr><td data-value='chucknorris'><a target='_blank' href='http://en.wikipedia.org/wiki/Chuck_Norris'>@chucknorris</a></td><td>100</td><td data-value='1940/03/10'>1940-03-10</td></tr>";
+
+            var $table = $('table');
+
+            $('button.add-row').on('click', function () {
+                var $this = $(this);
+                $table.append(tableRow);
+                if ($this.data('sort')) $.bootstrapSortable(true);
+                return false;
+            });
+        }());
+	</script>
+</body>
+</html>
