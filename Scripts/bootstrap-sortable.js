@@ -25,7 +25,7 @@
 			$this.find('td').each(function () {
 				var $this = $(this);
 				if ($this.attr('data-dateformat') != undefined) {
-					$this.attr('data-value', moment($this.text(), $this.attr('data-dateformat')).format('YYYY-MM-DD'));
+					$this.attr('data-value', moment($this.text(), $this.attr('data-dateformat')).format('YYYY/MM/DD/HH/mm/ss'));
 				}
 				else {
 					$this.attr('data-value') === undefined && $this.attr('data-value', $this.text());
