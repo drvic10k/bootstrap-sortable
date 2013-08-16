@@ -14,7 +14,9 @@ Working [demo](http://htmlpreview.github.io/?https://github.com/drvic10k/bootstr
 ####Basic usage:
 
 Add references to bootstrap-sortable.css and bootstrap-sortable.js to your page. Add class "sortable" to your bootstrap table.
-HTML table has to be properly formated, using `<thead>`, `<th>` and `<tbody>` elements. You can disable sorting for a column by using `data-defaultsort='disabled'` attribute in the `<th>` element
+HTML table has to be properly formated, using `<thead>`, `<th>` and `<tbody>` elements.
+
+You can disable sorting for a column by using `data-defaultsort='disabled'` attribute in the `<th>` element
 
 When you add table rows or whole table from client side, use `$.bootstrapSortable(applyLast)` function to add sortability to parts/tables that were not present at document.ready.
 Use optional paramater `applyLast=true` if you want to preserve the last used sorting.
