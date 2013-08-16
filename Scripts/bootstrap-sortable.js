@@ -32,7 +32,8 @@
 				}
 			});
 			$this.find('thead th').each(function (index) {
-				var $this = $(this);
+			    var $this = $(this);
+			    if ($this.attr('data-defaultsort') == "disabled") { return; }
 				lastSort = applyLast ? lastSort : -1;
 				bsSort[index] = applyLast ? bsSort[index] : $this.attr('data-defaultsort');
 				if (bsSort[index] != null && (applyLast == (index == lastSort))) {
@@ -46,6 +47,8 @@
 	// add click event to table header
 	$document.on('click', 'table.sortable thead th', function (e) {
 		var $this = $(this), $table = $this.parents('table.sortable');
+
+		if ($this.attr('data-defaultsort') == "disabled") { return; }
 
 		// update arrow icon
 		if ($.browser.mozilla) {

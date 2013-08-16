@@ -25,10 +25,10 @@ table.sortable thead th {
     left: 0;
 }
 
-    table.sortable thead th:hover {
+    table.sortable thead th:hover:not([data-defaultsort=disabled]) {
         background: #efefef;
     }
 
     table.sortable thead th div.mozilla {
-        position:relative;
+        position: relative;
     }
