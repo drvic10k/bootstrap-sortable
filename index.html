@@ -1,95 +1,63 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+<head>
+    <title>Bootstrap Sortable Tables</title>
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-sortable.css">
+</head>
+<body>
+    <div class='container'>
+        <div class='hero-unit'>
+            <h1>Bootstrap Sortable</h1>
+            <p class='lead'>Javascript powered, sortable tables.</p>
+            <a href='https://github.com/drvic10k/bootstrap-sortable' class='btn btn-success'>See on GitHub</a>
+        </div>
 
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+        <table class='table table-bordered table-striped sortable'>
+            <thead>
+                <tr>
+                    <th data-defaultsort='asc'>Name (Asc)</th>
+                    <th data-defaultsort='asc'>Awesome Rating (Asc)</th>
+                    <th data-defaultsort='desc'>Date (Desc)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td data-value='drvic10k'><a target="_blank" href="https://github.com/drvic10k">@drvic10k</a></td>
+                    <td>10</td>
+                    <td data-value='2013/03/03'>2013-03-03</td>
+                </tr>
+                <tr>
+                    <td data-value='jbrooksuk'><a target="_blank" href="https://github.com/jbrooksuk">@jbrooksuk</a></td>
+                    <td>9.5</td>
+                    <td data-value='2010/04/17'>2010-04-17</td>
+                </tr>
+            </tbody>
+        </table>
 
-    <title>Bootstrap-sortable by drvic10k</title>
-  </head>
+        <div class='well'>
+            <p>Sort by awesome rating descending, then clik on Add Row (auto sort).</p>
+            <button type='button' class='btn btn-primary add-row'>Add Row (no auto sort)</button>
+            <button type='button' class='btn btn-primary add-row' data-sort="true">Add Row (auto sort)</button>
+        </div>
 
-  <body>
-    <header>
-      <div class="inner">
-        <h1>Bootstrap-sortable</h1>
-        <h2>adding sorting ability to bootstrap table</h2>
-        <a href="https://github.com/drvic10k/bootstrap-sortable" class="button"><small>View project on</small>GitHub</a>
-      </div>
-    </header>
-
-    <div id="content-wrapper">
-      <div class="inner clearfix">
-        <section id="main-content">
-          <h1>
-<a name="bootstrap-sortable" class="anchor" href="#bootstrap-sortable"><span class="octicon octicon-link"></span></a>bootstrap-sortable</h1>
-
-<p>adding sorting ability to bootstrap table<br>
-Current version: 1.4.0</p>
-
-<p>In fact, it can be used for any tables.</p>
-
-<p>Sorting provided by <a href="https://github.com/Sjeiti/TinySort">TinySort</a>.
-Date parsing provided by <a href="https://github.com/timrwood/moment/">moment.js</a>.</p>
-
-<p>Available for download with NuGet, search for <code>bootstrap-sortable</code>.<br>
-Working <a href="http://htmlpreview.github.io/?https://github.com/drvic10k/bootstrap-sortable/blob/master/Demo/index.html">demo</a>.</p>
-
-<h4>
-<a name="basic-usage" class="anchor" href="#basic-usage"><span class="octicon octicon-link"></span></a>Basic usage:</h4>
-
-<p>Add references to bootstrap-sortable.css and bootstrap-sortable.js to your page. Add class "sortable" to your bootstrap table.
-HTML table has to be properly formated, using <code>&lt;thead&gt;</code>, <code>&lt;th&gt;</code> and <code>&lt;tbody&gt;</code> elements. You can disable sorting for a column by using <code>&lt;td&gt;</code> instead of <code>&lt;th&gt;</code> in header.</p>
-
-<p>When you add table rows or whole table from client side, use <code>$.bootstrapSortable(applyLast)</code> function to add sortability to parts/tables that were not present at document.ready.
-Use optional paramater <code>applyLast=true</code> if you want to preserve the last used sorting.</p>
-
-<h4>
-<a name="optional-attributes" class="anchor" href="#optional-attributes"><span class="octicon octicon-link"></span></a>Optional attributes:</h4>
-
-<p>You can preset one column to be sorted when table is loaded using <code>data-defaultsort</code> attribute:</p>
-
-<div class="highlight"><pre><span class="nt">&lt;th&gt;</span> Column 1<span class="nt">&lt;/th&gt;</span>
-<span class="nt">&lt;th&gt;</span> Column 2<span class="nt">&lt;/th&gt;</span>
-<span class="nt">&lt;th</span> <span class="na">data-defaultsort=</span><span class="s">"desc"</span><span class="nt">&gt;</span> Column 3<span class="nt">&lt;/th&gt;</span>
-</pre></div>
-
-<p>You can change the value that is used for sorting for each <code>&lt;td&gt;</code> using <code>data-value</code> attribute:</p>
-
-<div class="highlight"><pre><span class="nt">&lt;td</span> <span class="na">data-value=</span><span class="s">"5.45"</span><span class="nt">&gt;</span>5,45<span class="nt">&lt;/td&gt;</span>
-</pre></div>
-
-<p>You can sort dates, even if they are in different formats. Specify date formats according to moment.js documentation.</p>
-
-<div class="highlight"><pre><span class="nt">&lt;td</span> <span class="na">data-dateformat=</span><span class="s">"YYYY-MM-DD"</span><span class="nt">&gt;</span>2013-06-24<span class="nt">&lt;/td&gt;</span>
-<span class="nt">&lt;td</span> <span class="na">data-dateformat=</span><span class="s">"DD-MMM-YYYY"</span><span class="nt">&gt;</span>26 June 2013<span class="nt">&lt;/td&gt;</span>
-</pre></div>
-        </section>
-
-        <aside id="sidebar">
-          <a href="https://github.com/drvic10k/bootstrap-sortable/zipball/master" class="button">
-            <small>Download</small>
-            .zip file
-          </a>
-          <a href="https://github.com/drvic10k/bootstrap-sortable/tarball/master" class="button">
-            <small>Download</small>
-            .tar.gz file
-          </a>
-
-          <p class="repo-owner"><a href="https://github.com/drvic10k/bootstrap-sortable"></a> is maintained by <a href="https://github.com/drvic10k">drvic10k</a>.</p>
-
-          <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
-        </aside>
-      </div>
     </div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script src='js/bootstrap-sortable.js'></script>
 
-  
-  </body>
+    <script>
+        (function () {
+            var tableRow = "<tr><td data-value='chucknorris'><a target='_blank' href='http://en.wikipedia.org/wiki/Chuck_Norris'>@chucknorris</a></td><td>100</td><td data-value='1940/03/10'>1940-03-10</td></tr>";
+
+            var $table = $('table');
+
+            $('button.add-row').on('click', function () {
+                var $this = $(this);
+                $table.append(tableRow);
+                if ($this.data('sort')) $.bootstrapSortable(true);
+                return false;
+            });
+        }());
+	</script>
+</body>
 </html>
