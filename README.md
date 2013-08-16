@@ -9,7 +9,7 @@ Sorting provided by [TinySort](https://github.com/Sjeiti/TinySort).
 Date parsing provided by [moment.js](https://github.com/timrwood/moment/).
 
 Available for download with NuGet, search for `bootstrap-sortable`.  
-Working [demo](http://htmlpreview.github.io/?https://github.com/drvic10k/bootstrap-sortable/blob/master/Demo/index.html).
+Working [demo](http://htmlpreview.github.io/?https://github.com/drvic10k/bootstrap-sortable/blob/gh-pages/index.html).
 
 ####Basic usage:
 
