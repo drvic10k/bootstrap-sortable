@@ -41,6 +41,7 @@
 					$this.click();
 				}
 			});
+			$this.trigger("change");
 		});
 	};
 
@@ -73,6 +74,7 @@
 		// sort rows
 		var rows = $table.find('tbody tr');
 		rows.tsort('td:eq(' + nr + ')', { order: bsSort[nr], attr: 'data-value' });
+		$table.trigger("change");
 	});
 
 	// jQuery 1.9 removed this object
