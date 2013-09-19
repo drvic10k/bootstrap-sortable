@@ -17,8 +17,8 @@
         <table class='table table-bordered table-striped sortable'>
             <thead>
                 <tr>
-                    <th data-defaultsort='asc'>Name (Asc)</th>
-                    <th data-defaultsort='asc'>Awesome Rating (Asc)</th>
+                    <th>Name (Asc)</th>
+                    <th>Awesome Rating (Asc)</th>
                     <th data-defaultsort='desc'>Date (Desc)</th>
                 </tr>
             </thead>
@@ -58,6 +58,9 @@
                 if ($this.data('sort')) $.bootstrapSortable(true);
                 return false;
             });
+
+            $('table.sortable').on('sorted', function () { alert("Table was sorted."); });
+
         }());
 	</script>
 </body>
