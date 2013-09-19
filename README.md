@@ -1,7 +1,7 @@
 bootstrap-sortable
 ==================
 adding sorting ability to bootstrap table  
-Current version: 1.4.0
+Current version: 1.5.0
 
 In fact, it can be used for any tables.
 
@@ -20,6 +20,8 @@ You can disable sorting for a column by using `data-defaultsort='disabled'` attr
 
 When you add table rows or whole table from client side, use `$.bootstrapSortable(applyLast)` function to add sortability to parts/tables that were not present at document.ready.
 Use optional paramater `applyLast=true` if you want to preserve the last used sorting.
+
+After sorting a column, the table triggers an event `sorted`.
 
 ####Optional attributes:
 
