@@ -6,16 +6,16 @@
     top: 50%;
     right: 5px;
     font-size: 0;
-    border-color: #ccc transparent transparent transparent;
+    border-color: transparent transparent #ccc transparent;
     line-height: 0;
     height: 0;
     width: 0;
-    margin-top: -2px;
+    margin-top: -7px;
 }
 
-    table.sortable span.arrow.up {
-        border-color: transparent transparent #ccc transparent;
-        margin-top: -7px;
+    table.sortable span.arrow.down {
+        border-color: #ccc transparent transparent transparent;
+        margin-top: -2px;
     }
 
 table.sortable thead th {
