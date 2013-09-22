@@ -74,7 +74,7 @@
         var nr = $this.attr('data-sortkey');
         lastSort = nr;
         bsSort[nr] = bsSort[nr] == 'asc' ? 'desc' : 'asc';
-        if (bsSort[nr] == 'desc') { $this.find('span.arrow').addClass('up'); }
+        if (bsSort[nr] == 'desc') { $this.find('span.arrow').addClass('down'); }
 
         // sort rows
         var rows = $table.find('tbody tr');
