@@ -4,6 +4,7 @@
     <title>Bootstrap Sortable Tables</title>
     <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="Contents/bootstrap-sortable.css">
+    <link href="Contents/site.css" rel="stylesheet" />
 </head>
 <body>
     <div class='container'>
@@ -11,15 +12,14 @@
             <h1>Bootstrap Sortable</h1>
             <p class='lead'>Javascript powered, sortable tables.</p>
             <a href='https://github.com/drvic10k/bootstrap-sortable' class='btn btn-success'>See on GitHub</a>
-            <a href='http://htmlpreview.github.io/?https://github.com/drvic10k/bootstrap-sortable/blob/gh-pages/NeuralLink.html' class='btn btn-info'>See data from NeuralLink (Chris Rayl)</a>
         </div>
 
         <table class='table table-bordered table-striped sortable'>
             <thead>
                 <tr>
-                    <th>Name (Asc)</th>
-                    <th>Awesome Rating (Asc)</th>
-                    <th data-defaultsort='desc'>Date (Desc)</th>
+                    <th>Name</th>
+                    <th>Awesome Rating</th>
+                    <th data-defaultsort='desc'>Date</th>
                 </tr>
             </thead>
             <tbody>
@@ -42,7 +42,45 @@
             <button type='button' class='btn btn-primary add-row' data-sort="true">Add Row (auto sort)</button>
         </div>
 
+        <div class="well">
+            <span class="groupbox">Options</span>
+            <div class="well" style="margin-top: 10px">
+                <span class="groupbox">Event</span>
+                <label class="checkbox">
+                    <input type="checkbox" checked="checked" id="event" />
+                    Hook on 'sorted' event
+                </label>
+            </div>
+            <div class="well" style="margin-bottom: 0px;">
+                <span class="groupbox">Sorting sign</span>
+                <label class="radio">
+                    <input type="radio" name="sign" id="default" value="" checked>
+                    Default (points towards larger value)
+                </label>
+                <label class="radio">
+                    <input type="radio" name="sign" id="reversed" value="reversed">
+                    Reversed (points towards smaller value)
+                </label>
+                <label class="radio">
+                    <input type="radio" name="sign" id="az" value="az">
+                    a..z
+                </label>
+                <label class="radio">
+                    <input type="radio" name="sign" id="AZ" value="AZ">
+                    A..Z
+                </label>
+                <label class="radio">
+                    <input type="radio" name="sign" id="19" value="_19">
+                    1..9
+                </label>
+                <label class="radio">
+                    <input type="radio" name="sign" id="month" value="month">
+                    jan..dec
+                </label>
+            </div>
+        </div>
     </div>
+
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
     <script src='Scripts/bootstrap-sortable.js'></script>
 
@@ -59,9 +97,23 @@
                 return false;
             });
 
-            $('table.sortable').on('sorted', function () { alert("Table was sorted."); });
+            $table.on('sorted', function () { alert("Table was sorted."); });
+
+            $('#event').on('change', function () {
+                var $this = $(this);
+                if ($this.is(':checked')) {
+                    $table.on('sorted', function () { alert("Table was sorted."); });
+                }
+                else {
+                    $table.off('sorted');
+                }
+            });
+
+            $("input[name=sign]:radio").change(function () {
+                $.bootstrapSortable(true, $(this).val());
+            });
 
         }());
-	</script>
+    </script>
 </body>
 </html>
