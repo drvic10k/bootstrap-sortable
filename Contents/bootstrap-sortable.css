@@ -1,10 +1,16 @@
-﻿table.sortable span.arrow {
-    border-style: solid;
-    border-width: 5px;
+﻿table.sortable span.sign {
     display: block;
     position: absolute;
     top: 50%;
     right: 5px;
+    font-size: 12px;
+    margin-top: -10px;
+    color: #bfbfc1;
+}
+
+table.sortable span.arrow, span.reversed {
+    border-style: solid;
+    border-width: 5px;
     font-size: 0;
     border-color: #ccc transparent transparent transparent;
     line-height: 0;
@@ -17,6 +23,50 @@
         border-color: transparent transparent #ccc transparent;
         margin-top: -7px;
     }
+
+table.sortable span.reversed {
+    border-color: transparent transparent #ccc transparent;
+    margin-top: -7px;
+}
+
+    table.sortable span.reversed.up {
+        border-color: #ccc transparent transparent transparent;
+        margin-top: -2px;
+    }
+
+
+
+table.sortable span.az:before {
+    content: "a .. z";
+}
+
+table.sortable span.az.up:before {
+    content: "z .. a";
+}
+
+table.sortable span.AZ:before {
+    content: "A .. Z";
+}
+
+table.sortable span.AZ.up:before {
+    content: "Z .. A";
+}
+
+table.sortable span._19:before {
+    content: "1 .. 9";
+}
+
+table.sortable span._19.up:before {
+    content: "9 .. 1";
+}
+
+table.sortable span.month:before {
+    content: "jan .. dec";
+}
+
+table.sortable span.month.up:before {
+    content: "dec .. jan";
+}
 
 table.sortable thead th {
     cursor: pointer;

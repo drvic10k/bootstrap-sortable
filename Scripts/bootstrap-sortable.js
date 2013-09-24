@@ -11,14 +11,24 @@
 
     var $document = $(document),
         bsSort = [],
-    	lastSort;
+    	lastSort,
+        signClass;
 
-    $.bootstrapSortable = function (applyLast) {
+    $.bootstrapSortable = function (applyLast, sign) {
+
+        //Set class based on sign parameter
+        if (!sign) {
+            signClass = "arrow";
+        }
+        else {
+            signClass = sign
+        }
+
         // set attributes needed for sorting
         $('table.sortable').each(function () {
             var $this = $(this);
             applyLast = (applyLast === true);
-            $this.find('span.arrow').remove();
+            $this.find('span.sign').remove();
             $this.find('thead th').each(function (index) {
                 $(this).attr('data-sortkey', index);
             });
@@ -63,18 +73,18 @@
                 moz_arrow.parent().html(moz_arrow.text());
             }
             $this.wrapInner('<div class="mozilla"></div>');
-            $this.children().eq(0).append('<span class="arrow"></span>');
+            $this.children().eq(0).append('<span class="sign ' + signClass + '"></span>');
         }
         else {
-            $table.find('span.arrow').remove();
-            $this.append('<span class="arrow"></span>');
+            $table.find('span.sign').remove();
+            $this.append('<span class="sign ' + signClass + '"></span>');
         }
 
         // sort direction
         var nr = $this.attr('data-sortkey');
         lastSort = nr;
         bsSort[nr] = bsSort[nr] == 'asc' ? 'desc' : 'asc';
-        if (bsSort[nr] == 'desc') { $this.find('span.arrow').addClass('up'); }
+        if (bsSort[nr] == 'desc') { $this.find('span.sign').addClass('up'); }
 
         // sort rows
         var rows = $table.find('tbody tr');
