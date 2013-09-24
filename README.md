@@ -23,6 +23,13 @@ Use optional paramater `applyLast=true` if you want to preserve the last used so
 
 After sorting a column, the table triggers an event `sorted`.
 
+####Sorting direction signs:
+You can choose the sign that show the sort direcion. Default is the arrow pointing towards the heigher value.
+
+This proved to be contra-intuitive for some, so you can change it to opposite using the second parameter: `$.bootstrapSortable(applyLast, 'reversed')`.
+
+Other possible values are `'a..z'`, `'A..Z'`, `'1..9'`, `'jan..dec'`. (See [demo](http://htmlpreview.github.io/?https://github.com/drvic10k/bootstrap-sortable/blob/gh-pages/index.html) to see how it looks.)
+
 ####Optional attributes:
 
 You can preset one column to be sorted when table is loaded using `data-defaultsort` attribute:
