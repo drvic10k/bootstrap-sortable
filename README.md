@@ -11,6 +11,9 @@ Date parsing provided by [moment.js](https://github.com/timrwood/moment/).
 Available for download with NuGet, search for `bootstrap-sortable`.  
 Working [demo](http://htmlpreview.github.io/?https://github.com/drvic10k/bootstrap-sortable/blob/gh-pages/index.html).
 
+####Dependencies:
+You should add the provided "moment.js"-Library" or get yourself a copy from http://momentjs.com.
+
 ####Basic usage:
 
 Add references to bootstrap-sortable.css and bootstrap-sortable.js to your page. Add class "sortable" to your bootstrap table.
@@ -49,3 +52,4 @@ You can sort dates, even if they are in different formats. Specify date formats 
 <td data-dateformat="YYYY-MM-DD">2013-06-24</td>
 <td data-dateformat="DD-MMM-YYYY">26 June 2013</td>
 ```
+This only works if you include any version of Moment.js. If Moment.Js is not found it will fallback to the usual sorting.
