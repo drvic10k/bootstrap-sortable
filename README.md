@@ -1,7 +1,7 @@
 bootstrap-sortable
 ==================
 adding sorting ability to bootstrap table  
-Current version: 1.6.0
+Current version: 1.7.0
 
 In fact, it can be used for any tables.
 
@@ -12,7 +12,7 @@ Available for download with NuGet, search for `bootstrap-sortable`.
 Working [demo](http://htmlpreview.github.io/?https://github.com/drvic10k/bootstrap-sortable/blob/gh-pages/index.html).
 
 ####Dependencies:
-You should add the provided "moment.js"-Library" or get yourself a copy from http://momentjs.com.
+You should add the provided "moment.js" library, or get yourself a copy from http://momentjs.com.
 
 ####Basic usage:
 
@@ -47,9 +47,8 @@ You can change the value that is used for sorting for each `<td>` using `data-va
 <td data-value="5.45">5,45</td>
 ```
 
-You can sort dates, even if they are in different formats. Specify date formats according to moment.js documentation.
+You can sort dates, even if they are in different formats. Specify date formats according to moment.js documentation. This only works if you include any version of Moment.js. If Moment.js is not found it will fallback to the usual sorting.
 ```html
 <td data-dateformat="YYYY-MM-DD">2013-06-24</td>
 <td data-dateformat="DD-MMM-YYYY">26 June 2013</td>
 ```
-This only works if you include any version of Moment.js. If Moment.Js is not found it will fallback to the usual sorting.
