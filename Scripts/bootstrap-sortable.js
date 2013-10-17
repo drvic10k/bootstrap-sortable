@@ -10,6 +10,9 @@
 
     $.bootstrapSortable = function (applyLast, sign) {
 
+	// check if moment.js is available
+	var momentJsAvailable = (typeof moment !== 'undefined')
+
         //Set class based on sign parameter
         if (!sign) {
             signClass = "arrow";
@@ -28,7 +31,7 @@
             });
             $this.find('td').each(function () {
                 var $this = $(this);
-                if ($this.attr('data-dateformat') != undefined) {
+                if ($this.attr('data-dateformat') != undefined && momentJsAvailable) {
                     $this.attr('data-value', moment($this.text(), $this.attr('data-dateformat')).format('YYYY/MM/DD/HH/mm/ss'));
                 }
                 else {
