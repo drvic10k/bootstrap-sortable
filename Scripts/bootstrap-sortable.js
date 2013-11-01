@@ -5,21 +5,16 @@
 
     var $document = $(document),
         bsSort = [],
-    	lastSort,
+        lastSort,
         signClass;
 
     $.bootstrapSortable = function (applyLast, sign) {
 
-	// check if moment.js is available
-	var momentJsAvailable = (typeof moment !== 'undefined')
+        // check if moment.js is available
+        var momentJsAvailable = (typeof moment !== 'undefined');
 
         //Set class based on sign parameter
-        if (!sign) {
-            signClass = "arrow";
-        }
-        else {
-            signClass = sign
-        }
+        signClass = !sign ? "arrow" : sign;
 
         // set attributes needed for sorting
         $('table.sortable').each(function () {
@@ -62,7 +57,7 @@
     //Sorting mechanism separated
     function doSort($this, $table) {
         if ($this.attr('data-defaultsort') == "disabled") { return; }
-
+        var localSignClass= $this.attr("data-defaultsign")||signClass;
         // update arrow icon
         if ($.browser.mozilla) {
             var moz_arrow = $table.find('div.mozilla');
@@ -70,11 +65,11 @@
                 moz_arrow.parent().html(moz_arrow.text());
             }
             $this.wrapInner('<div class="mozilla"></div>');
-            $this.children().eq(0).append('<span class="sign ' + signClass + '"></span>');
+            $this.children().eq(0).append('<span class="sign ' + localSignClass + '"></span>');
         }
         else {
             $table.find('span.sign').remove();
-            $this.append('<span class="sign ' + signClass + '"></span>');
+            $this.append('<span class="sign ' + localSignClass + '"></span>');
         }
 
         // sort direction
@@ -86,18 +81,18 @@
         // sort rows
         var rows = $table.find('tbody tr');
         rows.tsort('td:eq(' + nr + ')', { order: bsSort[nr], attr: 'data-value' });
-    };
+    }
 
     // jQuery 1.9 removed this object
     if (!$.browser) {
         $.browser = { chrome: false, mozilla: false, opera: false, msie: false, safari: false };
         var ua = navigator.userAgent;
-        $.each($.browser, function (c, a) {
+        $.each($.browser, function (c) {
             $.browser[c] = ((new RegExp(c, 'i').test(ua))) ? true : false;
-            if ($.browser.mozilla && c == 'mozilla') { $.browser.mozilla = ((new RegExp('firefox', 'i').test(ua))) ? true : false; };
-            if ($.browser.chrome && c == 'safari') { $.browser.safari = false; };
+            if ($.browser.mozilla && c == 'mozilla') { $.browser.mozilla = ((new RegExp('firefox', 'i').test(ua))) ? true : false; }
+            if ($.browser.chrome && c == 'safari') { $.browser.safari = false; }
         });
-    };
+    }
 
     // Initialise on DOM ready
     $($.bootstrapSortable);
