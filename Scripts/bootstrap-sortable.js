@@ -22,10 +22,14 @@
             applyLast = (applyLast === true);
             $this.find('span.sign').remove();
             $this.find('thead tr').each(function (rowIndex) {
+                var columnsSkipped = 0;
                 $(this).find('th').each(function (columnIndex) {
                     var $this = $(this);
-                    $this.attr('data-sortcolumn', columnIndex);
+                    $this.attr('data-sortcolumn', columnIndex + columnsSkipped);
                     $this.attr('data-sortkey', columnIndex + '-' + rowIndex);
+                    if ($this.attr("colspan") !== undefined) {
+                        columnsSkipped += parseInt($this.attr("colspan")) - 1;
+                    }
                 });
             });
             $this.find('td').each(function () {
