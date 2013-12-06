@@ -21,8 +21,16 @@
             var $this = $(this);
             applyLast = (applyLast === true);
             $this.find('span.sign').remove();
-            $this.find('thead th').each(function (index) {
-                $(this).attr('data-sortkey', index);
+            $this.find('thead tr').each(function (rowIndex) {
+                var columnsSkipped = 0;
+                $(this).find('th').each(function (columnIndex) {
+                    var $this = $(this);
+                    $this.attr('data-sortcolumn', columnIndex + columnsSkipped);
+                    $this.attr('data-sortkey', columnIndex + '-' + rowIndex);
+                    if ($this.attr("colspan") !== undefined) {
+                        columnsSkipped += parseInt($this.attr("colspan")) - 1;
+                    }
+                });
             });
             $this.find('td').each(function () {
                 var $this = $(this);
@@ -35,11 +43,12 @@
             });
             $this.find('thead th').each(function (index) {
                 var $this = $(this);
+                var sortKey = $this.attr('data-sortkey');
                 if ($this.attr('data-defaultsort') == "disabled") { return; }
                 lastSort = applyLast ? lastSort : -1;
-                bsSort[index] = applyLast ? bsSort[index] : $this.attr('data-defaultsort');
-                if (bsSort[index] != null && (applyLast == (index == lastSort))) {
-                    bsSort[index] = bsSort[index] == 'asc' ? 'desc' : 'asc';
+                bsSort[sortKey] = applyLast ? bsSort[sortKey] : $this.attr('data-defaultsort');
+                if (bsSort[sortKey] != null && (applyLast == (sortKey == lastSort))) {
+                    bsSort[sortKey] = bsSort[sortKey] == 'asc' ? 'desc' : 'asc';
                     doSort($this, $this.parents('table.sortable'))
                 }
             });
@@ -73,14 +82,15 @@
         }
 
         // sort direction
-        var nr = $this.attr('data-sortkey');
-        lastSort = nr;
-        bsSort[nr] = bsSort[nr] == 'asc' ? 'desc' : 'asc';
-        if (bsSort[nr] == 'desc') { $this.find('span.sign').addClass('up'); }
+        var sortColumn = $this.attr('data-sortcolumn');
+        var sortKey = $this.attr('data-sortkey');
+        lastSort = sortColumn;
+        bsSort[sortKey] = bsSort[sortKey] == 'asc' ? 'desc' : 'asc';
+        if (bsSort[sortKey] == 'desc') { $this.find('span.sign').addClass('up'); }
 
         // sort rows
         var rows = $table.find('tbody tr');
-        rows.tsort('td:eq(' + nr + ')', { order: bsSort[nr], attr: 'data-value' });
+        rows.tsort('td:eq(' + sortColumn + ')', { order: bsSort[sortKey], attr: 'data-value' });
     }
 
     // jQuery 1.9 removed this object
