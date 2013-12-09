@@ -41,10 +41,9 @@
                     $this.attr('data-value') === undefined && $this.attr('data-value', $this.text());
                 }
             });
-            $this.find('thead th').each(function (index) {
+            $this.find('thead th[data-defaultsort!="disabled"]').each(function (index) {
                 var $this = $(this);
                 var sortKey = $this.attr('data-sortkey');
-                if ($this.attr('data-defaultsort') == "disabled") { return; }
                 lastSort = applyLast ? lastSort : -1;
                 bsSort[sortKey] = applyLast ? bsSort[sortKey] : $this.attr('data-defaultsort');
                 if (bsSort[sortKey] != null && (applyLast == (sortKey == lastSort))) {
@@ -57,7 +56,7 @@
     };
 
     // add click event to table header
-    $document.on('click', 'table.sortable thead th', function (e) {
+    $document.on('click', 'table.sortable thead th[data-defaultsort!="disabled"]', function (e) {
         var $this = $(this), $table = $this.parents('table.sortable');
         doSort($this, $table);
         $table.trigger('sorted');
@@ -65,7 +64,6 @@
 
     //Sorting mechanism separated
     function doSort($this, $table) {
-        if ($this.attr('data-defaultsort') == "disabled") { return; }
         var localSignClass= $this.attr("data-defaultsign")||signClass;
         // update arrow icon
         if ($.browser.mozilla) {
