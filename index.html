@@ -2,9 +2,9 @@
 <html>
 <head>
     <title>Bootstrap Sortable Tables</title>
-    <link rel="stylesheet"  type="text/css" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" >
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css">
     <link rel="stylesheet" type="text/css" href="Contents/bootstrap-sortable.css">
-    <link rel="stylesheet"  type="text/css" href="Contents/site.css" />
+    <link rel="stylesheet" type="text/css" href="Contents/site.css" />
 </head>
 <body>
     <div class='container'>
@@ -13,35 +13,28 @@
             <p class='lead'>Javascript powered, sortable tables.</p>
             <a href='https://github.com/drvic10k/bootstrap-sortable' class='btn btn-success'>See on GitHub</a>
         </div>
-
         <table class='table table-bordered table-striped sortable'>
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Awesome Rating</th>
-                    <th data-defaultsort='desc' data-defaultsign="month">Date</th>
+                    <th data-defaultsort="disabled"></th>
+                    <th data-defaultsort="disabled"></th>
+                    <th colspan="3" style="text-align: center;">Results</th>
+                </tr>
+                <tr>
+                    <th style="width: 20%" data-defaultsort="asc">Name</th>
+                    <th style="width: 20%" data-defaultsign="month">Date</th>
+                    <th style="width: 20%">Round 1</th>
+                    <th style="width: 20%">Round 2</th>
+                    <th style="width: 20%" data-mainsort="true">Total</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td data-value='drvic10k'><a target="_blank" href="https://github.com/drvic10k">@drvic10k</a></td>
-                    <td>10</td>
-                    <td data-value='2013/03/03'>2013-03-03</td>
-                </tr>
-                <tr>
-                    <td data-value='jbrooksuk'><a target="_blank" href="https://github.com/jbrooksuk">@jbrooksuk</a></td>
-                    <td>9.5</td>
-                    <td data-value='2010/04/17'>2010-04-17</td>
-                </tr>
             </tbody>
         </table>
-
         <div class='well'>
-            <p>Sort by awesome rating descending, then clik on Add Row (auto sort).</p>
-            <button type='button' class='btn btn-primary add-row'>Add Row (no auto sort)</button>
-            <button type='button' class='btn btn-primary add-row' data-sort="true">Add Row (auto sort)</button>
+            <button type='button' class='btn btn-primary add-row' data-sort="true">Add Row (use last sort)</button>
+            <button type='button' class='btn btn-primary add-row'>Add Row (use default sort)</button>
         </div>
-
         <div class="well">
             <span class="groupbox">Options</span>
             <div class="well" style="margin-top: 10px">
@@ -86,16 +79,33 @@
     <script src='Scripts/bootstrap-sortable.js'></script>
 
     <script>
-        (function () {
-            var tableRow = "<tr><td data-value='chucknorris'><a target='_blank' href='http://en.wikipedia.org/wiki/Chuck_Norris'>@chucknorris</a></td><td>100</td><td data-value='1940/03/10'>1940-03-10</td></tr>";
 
+        function randomDate(start, end) {
+            return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()))
+        }
+
+        function randomName() {
+            var firstName = ['Jack', 'Peter', 'Frank', 'Steven'];
+            var surname = ['White', 'Jackson', 'Sinatra', 'Spielberg'];
+            return firstName[Math.floor(Math.random() * 4)] + " " + surname[Math.floor(Math.random() * 4)];
+        }
+
+        function newTableRow() {
+            var newDate = moment(randomDate(new Date(2000, 0, 1), new Date())).format('D.M.YYYY');
+            var value1 = Math.round(Math.random() * Math.random() * 100 * 100) / 100;
+            var value2 = Math.round(Math.random() * Math.random() * 100 * 100) / 100;
+            return "<tr><td>" + randomName() + "</td><td data-dateformat='D-M-YYYY'>" + newDate + "</td><td>" + value1 + "</td><td>" + value2 + "</td><td>" + Math.round((value1 + value2) * 100) / 100 + "</td></tr>";
+        }
+
+        (function () {
             var $table = $('table');
+            $table.append(newTableRow());
+            $table.append(newTableRow());
 
             $('button.add-row').on('click', function () {
                 var $this = $(this);
-                $table.append(tableRow);
-                if ($this.data('sort')) $.bootstrapSortable(true);
-                return false;
+                $table.append(newTableRow());
+                if ($this.data('sort')) { $.bootstrapSortable(true); } else { $.bootstrapSortable(false); }
             });
 
             $table.on('sorted', function () { alert("Table was sorted."); });
