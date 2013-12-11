@@ -44,9 +44,9 @@
             $this.find('thead th[data-defaultsort!="disabled"]').each(function (index) {
                 var $this = $(this);
                 var sortKey = $this.attr('data-sortkey');
-                lastSort = applyLast ? lastSort : -1;
+                var thisLastSort = applyLast ? lastSort : -1;
                 bsSort[sortKey] = applyLast ? bsSort[sortKey] : $this.attr('data-defaultsort');
-                if (bsSort[sortKey] != null && (applyLast == (sortKey == lastSort))) {
+                if (bsSort[sortKey] != null && (applyLast == (sortKey == thisLastSort))) {
                     bsSort[sortKey] = bsSort[sortKey] == 'asc' ? 'desc' : 'asc';
                     doSort($this, $this.parents('table.sortable'))
                 }
@@ -64,7 +64,25 @@
 
     //Sorting mechanism separated
     function doSort($this, $table) {
-        var localSignClass= $this.attr("data-defaultsign")||signClass;
+        var sortColumn = $this.attr('data-sortcolumn');
+
+        var colspan = $this.attr('colspan');
+        if (colspan) {
+            var selector;
+            for (var i = parseFloat(sortColumn) ; i < parseFloat(sortColumn) + parseFloat(colspan) ; i++) {
+                selector = selector + ', [data-sortcolumn="' + i + '"]';
+            }
+            var subHeader = $(selector).not('[colspan]');
+            var mainSort = subHeader.filter('[data-mainsort]').eq(0);
+
+            sortColumn = mainSort.length ? mainSort : subHeader.eq(0);
+            doSort(sortColumn, $table);
+            return;
+        }
+
+        //sortColumn = newColumn ? newColumn : sortColumn;
+
+        var localSignClass = $this.attr('data-defaultsign') || signClass;
         // update arrow icon
         if ($.browser.mozilla) {
             var moz_arrow = $table.find('div.mozilla');
@@ -80,9 +98,10 @@
         }
 
         // sort direction
-        var sortColumn = $this.attr('data-sortcolumn');
+
         var sortKey = $this.attr('data-sortkey');
-        lastSort = sortColumn;
+
+        lastSort = sortKey;
         bsSort[sortKey] = bsSort[sortKey] == 'asc' ? 'desc' : 'asc';
         if (bsSort[sortKey] == 'desc') { $this.find('span.sign').addClass('up'); }
 
