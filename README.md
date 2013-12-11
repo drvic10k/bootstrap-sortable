@@ -1,7 +1,7 @@
 bootstrap-sortable
 ==================
 adding sorting ability to bootstrap table  
-Current version: 1.7.1
+Current version: 1.8.0
 
 In fact, it can be used for any tables.
 
@@ -9,7 +9,7 @@ Sorting provided by [TinySort](https://github.com/Sjeiti/TinySort).
 Date parsing provided by [moment.js](https://github.com/timrwood/moment/).
 
 Available for download with NuGet, search for `bootstrap-sortable`.  
-Working [demo](http://htmlpreview.github.io/?https://github.com/drvic10k/bootstrap-sortable/blob/gh-pages/index.html).
+Working [demo](http://drvic10k.github.io/bootstrap-sortable/).
 
 ####Dependencies:
 You should add the provided "moment.js" library, or get yourself a copy from http://momentjs.com.
@@ -25,6 +25,11 @@ When you add table rows or whole table from client side, use `$.bootstrapSortabl
 Use optional paramater `applyLast=true` if you want to preserve the last used sorting.
 
 After sorting a column, the table triggers an event `sorted`.
+
+####Cell with `colspan` and multiple header rows
+When you have multiple header rows, all header cells in the same column can be used to sort that column.
+
+When you have cell with `colspan`, by default, the first column of the span will be sorted. You can override this by using `data-mainsort` attribute for the column that you want to be sorted with the `colspan` cell.
 
 ####Sorting direction signs:
 You can choose the sign that show the sort direcion. Default is the arrow pointing towards the heigher value.
