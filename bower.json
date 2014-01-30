@@ -1,0 +1,19 @@
+{
+  "name": "bootstrap-sortable",
+  "version": "1.8.0",
+  "homepage": "https://github.com/drvic10k/bootstrap-sortable",
+  "authors": [
+    "Matus Brlit <https://github.com/drvic10k>"
+  ],
+  "description": "Adding sorting ability to HTML tables",
+  "main": "/bootstrap-sortable.js",
+  "keywords": [
+    "sort table", "sortable", "sortable table", "bootstrap sortable", "bootstrap-sortable"
+  ],
+  "license": "MIT",
+  "ignore": [
+  ],
+  "dependencies": {
+    "jquery": ">= 1.9.0"
+  }
+}
