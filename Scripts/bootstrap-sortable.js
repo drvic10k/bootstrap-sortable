@@ -43,12 +43,14 @@
             });
             $this.find('thead th[data-defaultsort!="disabled"]').each(function (index) {
                 var $this = $(this);
+                var $sortTable = $this.closest('table.sortable');
+                $this.data('sortTable', $sortTable);
                 var sortKey = $this.attr('data-sortkey');
                 var thisLastSort = applyLast ? lastSort : -1;
                 bsSort[sortKey] = applyLast ? bsSort[sortKey] : $this.attr('data-defaultsort');
                 if (bsSort[sortKey] != null && (applyLast == (sortKey == thisLastSort))) {
                     bsSort[sortKey] = bsSort[sortKey] == 'asc' ? 'desc' : 'asc';
-                    doSort($this, $this.parents('table.sortable'))
+                    doSort($this, $sortTable)
                 }
             });
             $this.trigger('sorted');
@@ -57,7 +59,7 @@
 
     // add click event to table header
     $document.on('click', 'table.sortable thead th[data-defaultsort!="disabled"]', function (e) {
-        var $this = $(this), $table = $this.parents('table.sortable');
+        var $this = $(this), $table = $this.data('sortTable') || $this.closest('table.sortable');
         doSort($this, $table);
         $table.trigger('sorted');
     });
