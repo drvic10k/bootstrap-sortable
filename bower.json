@@ -6,7 +6,7 @@
     "Matus Brlit <https://github.com/drvic10k>"
   ],
   "description": "Adding sorting ability to HTML tables",
-  "main": "/bootstrap-sortable.js",
+  "main": "Scripts/bootstrap-sortable.js",
   "keywords": [
     "sort table", "sortable", "sortable table", "bootstrap sortable", "bootstrap-sortable"
   ],
@@ -14,6 +14,7 @@
   "ignore": [
   ],
   "dependencies": {
-    "jquery": ">= 1.9.0"
+    "jquery": ">= 1.9.0",
+    "moment": ">= 2.3.1"
   }
 }
