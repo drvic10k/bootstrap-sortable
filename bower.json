@@ -12,6 +12,7 @@
   ],
   "license": "MIT",
   "ignore": [
+    "Scripts/moment.min.js"
   ],
   "dependencies": {
     "jquery": ">= 1.9.0",
