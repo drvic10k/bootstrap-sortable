@@ -49,6 +49,13 @@ You can preset one column to be sorted when table is loaded using `data-defaults
 <th data-defaultsort="desc"> Column 3</th>
 ```
 
+To change the initial direction when sorting a colum for the first time, use the `data-firstsort` attribute:
+```html
+<th> Column 1</th>
+<th> Column 2</th>
+<th data-firstsort="desc"> Column 3</th>
+```
+
 You can change the value that is used for sorting for each `<td>` using `data-value` attribute:
 ```html
 <td data-value="5.45">5,45</td>

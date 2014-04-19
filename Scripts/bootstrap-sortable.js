@@ -102,8 +102,12 @@
         // sort direction
 
         var sortKey = $this.attr('data-sortkey');
+        var initialDirection = $this.attr('data-firstsort');
 
         lastSort = sortKey;
+        if (!bsSort[sortKey] && initialDirection) {
+            bsSort[sortKey] = initialDirection == 'asc' ? 'desc' : 'asc';
+        }
         bsSort[sortKey] = bsSort[sortKey] == 'asc' ? 'desc' : 'asc';
         if (bsSort[sortKey] == 'desc') { $this.find('span.sign').addClass('up'); }
 
