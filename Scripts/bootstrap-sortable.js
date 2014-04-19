@@ -6,7 +6,8 @@
     var $document = $(document),
         bsSort = [],
         lastSort,
-        signClass;
+        signClass,
+        previousSortKey;
 
     $.bootstrapSortable = function (applyLast, sign) {
 
@@ -105,7 +106,7 @@
         var initialDirection = $this.attr('data-firstsort');
 
         lastSort = sortKey;
-        if (!bsSort[sortKey] && initialDirection) {
+        if (!bsSort[sortKey] || previousSortKey !== sortKey) {
             bsSort[sortKey] = initialDirection == 'asc' ? 'desc' : 'asc';
         }
         bsSort[sortKey] = bsSort[sortKey] == 'asc' ? 'desc' : 'asc';
@@ -114,6 +115,7 @@
         // sort rows
         var rows = $table.find('tbody tr');
         rows.tsort('td:eq(' + sortColumn + ')', { order: bsSort[sortKey], attr: 'data-value' });
+        previousSortKey = sortKey;
     }
 
     // jQuery 1.9 removed this object
