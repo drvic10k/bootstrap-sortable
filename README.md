@@ -1,7 +1,7 @@
 bootstrap-sortable
 ==================
 adding sorting ability to bootstrap table  
-Current version: 1.8.0
+Current version: 1.8.1
 
 In fact, it can be used for any tables.
 
@@ -47,6 +47,13 @@ You can preset one column to be sorted when table is loaded using `data-defaults
 <th> Column 1</th>
 <th> Column 2</th>
 <th data-defaultsort="desc"> Column 3</th>
+```
+
+To change the initial direction when sorting a column for the first time, use the `data-firstsort` attribute:
+```html
+<th> Column 1</th>
+<th> Column 2</th>
+<th data-firstsort="desc"> Column 3</th>
 ```
 
 You can change the value that is used for sorting for each `<td>` using `data-value` attribute:
