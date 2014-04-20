@@ -82,9 +82,8 @@
             return;
         }
 
-        //sortColumn = newColumn ? newColumn : sortColumn;
-
         var localSignClass = $this.attr('data-defaultsign') || signClass;
+
         // update arrow icon
         if ($.browser.mozilla) {
             var moz_arrow = $table.find('div.mozilla');
@@ -100,11 +99,11 @@
         }
 
         // sort direction
-
         var sortKey = $this.attr('data-sortkey');
+        var initialDirection = $this.attr('data-firstsort') != 'desc' ? 'desc' : 'asc';
 
         lastSort = sortKey;
-        bsSort[sortKey] = bsSort[sortKey] == 'asc' ? 'desc' : 'asc';
+        bsSort[sortKey] = (bsSort[sortKey] || initialDirection) == 'asc' ? 'desc' : 'asc';
         if (bsSort[sortKey] == 'desc') { $this.find('span.sign').addClass('up'); }
 
         // sort rows
