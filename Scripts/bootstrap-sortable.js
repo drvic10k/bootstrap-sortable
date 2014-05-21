@@ -95,7 +95,14 @@
             $this.children().eq(0).append('<span class="sign ' + localSignClass + '"></span>');
         }
         else {
-            $table.find('span.sign').remove();
+            if (navigator.appVersion.indexOf("MSIE 9") > -1) {
+                elements = document.getElementsByClassName('sign');
+                    while (elements.length > 0) {
+                        elements[0].parentNode.removeChild(elements[0]);
+                    } 
+                } else {
+                $table.find('span.sign').remove();
+            }
             $this.append('<span class="sign ' + localSignClass + '"></span>');
         }
 
