@@ -11,7 +11,7 @@ Date parsing provided by [moment.js](https://github.com/timrwood/moment/).
 Available for download with NuGet, search for `bootstrap-sortable`.  
 Working [demo](http://drvic10k.github.io/bootstrap-sortable/).
 
-For compatibility issues with older browsers and possible workarounds, please look into the issues list with the label `compatibility`.
+For compatibility issues with older browsers and possible workarounds, please look into the [issues list](https://github.com/drvic10k/bootstrap-sortable/issues?labels=compatibility&page=1&state=closed).
 
 ####Dependencies:
 You should add the provided "moment.js" library, or get yourself a copy from http://momentjs.com.
