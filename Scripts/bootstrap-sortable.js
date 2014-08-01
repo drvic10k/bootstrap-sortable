@@ -32,7 +32,7 @@
                     }
                 });
             });
-            $this.children('tbody').children('tr').children('td').each(function () {
+            $this.find('td').each(function () {
                 var $this = $(this);
                 if ($this.attr('data-dateformat') !== undefined && momentJsAvailable) {
                     $this.attr('data-value', moment($this.text(), $this.attr('data-dateformat')).format('YYYY/MM/DD/HH/mm/ss'));
@@ -41,14 +41,14 @@
                     $this.attr('data-value') === undefined && $this.attr('data-value', $this.text());
                 }
             });
-            $this.children('thead').find('th[data-defaultsort!="disabled"]').each(function (index) {
+            $this.find('thead th[data-defaultsort!="disabled"]').each(function (index) {
                 var $this = $(this);
                 var $sortTable = $this.closest('table.sortable');
                 $this.data('sortTable', $sortTable);
                 var sortKey = $this.attr('data-sortkey');
                 var thisLastSort = applyLast ? lastSort : -1;
                 bsSort[sortKey] = applyLast ? bsSort[sortKey] : $this.attr('data-defaultsort');
-                if (bsSort[sortKey] !== null && (applyLast === (sortKey === thisLastSort))) {
+                if (bsSort[sortKey] !== undefined && (applyLast === (sortKey === thisLastSort))) {
                     bsSort[sortKey] = bsSort[sortKey] === 'asc' ? 'desc' : 'asc';
                     doSort($this, $sortTable);
                 }
@@ -87,7 +87,7 @@
         // update arrow icon
         if ($.browser.mozilla) {
             var moz_arrow = $table.find('div.mozilla');
-            if (moz_arrow !== null) {
+            if (moz_arrow !== undefined) {
                 moz_arrow.find('.sign').remove();
                 moz_arrow.parent().html(moz_arrow.html());
             }
