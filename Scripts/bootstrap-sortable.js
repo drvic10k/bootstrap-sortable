@@ -110,6 +110,11 @@
         // sort rows
         var rows = $table.children('tbody').children('tr');
         rows.tsort('td:eq(' + sortColumn + ')', { order: bsSort[sortKey], attr: 'data-value' });
+        
+        // add class to sorted column cells
+        $table.find('td.sorted, th.sorted').removeClass('sorted');
+        rows.find('td:eq(' + sortColumn + ')').addClass('sorted');
+        $this.addClass('sorted');
     }
 
     // jQuery 1.9 removed this object
