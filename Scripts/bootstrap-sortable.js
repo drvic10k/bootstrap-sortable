@@ -25,6 +25,7 @@
                 var columnsSkipped = 0;
                 $(this).find('th').each(function (columnIndex) {
                     var $this = $(this);
+                    $this.addClass('nosort').removeClass('up down');
                     $this.attr('data-sortcolumn', columnIndex + columnsSkipped);
                     $this.attr('data-sortkey', columnIndex + '-' + rowIndex);
                     if ($this.attr("colspan") !== undefined) {
@@ -98,6 +99,10 @@
         var localSignClass = $this.attr('data-defaultsign') || signClass;
 
         // update arrow icon
+        $table.find('th').each(function() {
+            $(this).removeClass('up').removeClass('down').addClass('nosort');
+        });
+
         if ($.browser.mozilla) {
             var moz_arrow = $table.find('div.mozilla');
             if (moz_arrow !== undefined) {
@@ -118,7 +123,12 @@
 
         context.lastSort = sortKey;
         bsSort[sortKey] = (bsSort[sortKey] || initialDirection) === 'asc' ? 'desc' : 'asc';
-        if (bsSort[sortKey] === 'desc') { $this.find('span.sign').addClass('up'); }
+        if (bsSort[sortKey] === 'desc') {
+            $this.find('span.sign').addClass('up');
+            $this.addClass('up').removeClass('down nosort');
+        } else {
+            $this.addClass('down').removeClass('up nosort');
+        }
 
         // sort rows
         var rows = $table.children('tbody').children('tr');
