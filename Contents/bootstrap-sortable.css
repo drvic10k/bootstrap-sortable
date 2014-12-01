@@ -8,7 +8,21 @@
     color: #bfbfc1;
 }
 
-table.sortable span.arrow, span.reversed {
+table.sortable th:after {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    font-size: 12px;
+    margin-top: -10px;
+    color: #bfbfc1;
+}
+
+table.sortable th.arrow:after {
+    content: '';
+}
+
+table.sortable span.arrow, span.reversed, th.arrow.down:after, th.reversedarrow.down:after, th.arrow.up:after, th.reversedarrow.up:after {
     border-style: solid;
     border-width: 5px;
     font-size: 0;
@@ -19,52 +33,54 @@ table.sortable span.arrow, span.reversed {
     margin-top: -2px;
 }
 
-    table.sortable span.arrow.up {
+    table.sortable span.arrow.up, th.arrow.up:after {
         border-color: transparent transparent #ccc transparent;
         margin-top: -7px;
     }
 
-table.sortable span.reversed {
+table.sortable span.reversed, th.reversedarrow.down:after {
     border-color: transparent transparent #ccc transparent;
     margin-top: -7px;
 }
 
-    table.sortable span.reversed.up {
+    table.sortable span.reversed.up, th.reversedarrow.up:after {
         border-color: #ccc transparent transparent transparent;
         margin-top: -2px;
     }
 
-
-
-table.sortable span.az:before {
+table.sortable span.az:before, th.az.down:after {
     content: "a .. z";
 }
 
-table.sortable span.az.up:before {
+table.sortable span.az.up:before, th.az.up:after {
     content: "z .. a";
 }
 
-table.sortable span.AZ:before {
+table.sortable th.az.nosort:after, th.AZ.nosort:after, th._19.nosort:after, th.month.nosort:after {
+    content: "..";
+}
+
+table.sortable span.AZ:before, th.AZ.down:after {
     content: "A .. Z";
 }
 
-table.sortable span.AZ.up:before {
+table.sortable span.AZ.up:before, th.AZ.up:after {
     content: "Z .. A";
 }
 
-table.sortable span._19:before {
+table.sortable span._19:before, th._19.down:after {
     content: "1 .. 9";
 }
 
-table.sortable span._19.up:before {
+table.sortable span._19.up:before, th._19.up:after {
     content: "9 .. 1";
 }
 
-table.sortable span.month:before {
+table.sortable span.month:before, th.month.down:after {
     content: "jan .. dec";
 }
 
-table.sortable span.month.up:before {
+table.sortable span.month.up:before, th.month.up:after {
     content: "dec .. jan";
 }
 
