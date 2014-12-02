@@ -1,7 +1,7 @@
 bootstrap-sortable
 ==================
 adding sorting ability to bootstrap table  
-Current version: 1.9.0
+Current version: 1.10.0
 
 In fact, it can be used for any tables.
 
@@ -28,7 +28,7 @@ Use optional paramater `applyLast=true` if you want to preserve the last used so
 
 After sorting a column, the table triggers an event `sorted`.
 
-####Cell with `colspan` and multiple header rows
+####Cell with `colspan` and multiple header rows:
 When you have multiple header rows, all header cells in the same column can be used to sort that column.
 
 When you have cell with `colspan`, by default, the first column of the span will be sorted. You can override this by using `data-mainsort` attribute for the column that you want to be sorted with the `colspan` cell.
@@ -41,6 +41,11 @@ This proved to be contra-intuitive for some, so you can change it to opposite us
 Other possible values are `'az'`, `'AZ'`, `'_19'`, `'month'`. (See [demo](http://htmlpreview.github.io/?https://github.com/drvic10k/bootstrap-sortable/blob/gh-pages/index.html) to see how it looks.)
 
 You can set individual signs for each column using `data-defaultsign` attribute in the `<th>` element.
+
+#####Alternative way of styling the sorting signs:
+Set `data-defaultsign='nospan'` and set a `class` on `<th>` elements. Then the sorting signs will be shown using `:after` pseudoelement on `<th>`. This can be seen on the first column in the demo page.
+For this purpose, sorted column headers have classes `up`, `down` and `nosort` respectively and all previous styles are supported.
+You can also do your own styling in `css`.
 
 ####Optional attributes:
 
