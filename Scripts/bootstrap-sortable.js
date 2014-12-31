@@ -61,6 +61,7 @@
     // add click event to table header
     $document.on('click', 'table.sortable thead th[data-defaultsort!="disabled"]', function (e) {
         var $this = $(this), $table = $this.data('sortTable') || $this.closest('table.sortable');
+        $table.trigger('before-sort');
         doSort($this, $table);
         $table.trigger('sorted');
     });
