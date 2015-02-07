@@ -123,7 +123,7 @@
 
         var colspan = $this.attr('colspan');
         if (colspan) {
-            var mainSort = parseFloat($this.data('mainsort')) || 0;
+            var mainSort = Math.min(colspan - 1, parseFloat($this.data('mainsort')) || 0);
             var rowIndex = parseFloat($this.data('sortkey').split('-').pop());
 
             // If there is one more row in header, delve deeper
