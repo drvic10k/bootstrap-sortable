@@ -32,18 +32,41 @@
                 bsSort = context.bsSort;
             applyLast = (applyLast === true);
             $this.find('span.sign').remove();
+
+            // Add placeholder cells for colspans
+            $this.find('thead [colspan]').each(function () {
+                var colspan = parseFloat($(this).attr('colspan'));
+                for (var i = 1; i < colspan; i++) {
+                    $(this).after('<th class="colspan-compensate">');
+                }
+            });
+
+            // Add placeholder cells for rowspans
+            $this.find('thead [rowspan]').each(function () {
+                var $cell = $(this);
+                var rowspan = parseFloat($cell.attr('rowspan'));
+                for (var i = 1; i < rowspan; i++) {
+                    var parentRow = $cell.parent('tr');
+                    var nextRow = parentRow.next('tr');
+                    var index = parentRow.children().index($cell);
+                    nextRow.children().eq(index).before('<th class="rowspan-compensate">');
+                }
+            });
+
+            // Set indexes to header cells
             $this.find('thead tr').each(function (rowIndex) {
-                var columnsSkipped = 0;
                 $(this).find('th').each(function (columnIndex) {
                     var $this = $(this);
                     $this.addClass('nosort').removeClass('up down');
-                    $this.attr('data-sortcolumn', columnIndex + columnsSkipped);
+                    $this.attr('data-sortcolumn', columnIndex);
                     $this.attr('data-sortkey', columnIndex + '-' + rowIndex);
-                    if ($this.attr("colspan") !== undefined) {
-                        columnsSkipped += parseInt($this.attr("colspan")) - 1;
-                    }
                 });
             });
+
+            // Cleanup placeholder cells
+            $this.find('thead .rowspan-compensate, .colspan-compensate').remove();
+
+            // Initialize sorting values
             $this.find('td').each(function () {
                 var $this = $(this);
                 if ($this.attr('data-dateformat') !== undefined && momentJsAvailable) {
