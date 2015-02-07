@@ -123,16 +123,16 @@
 
         var colspan = $this.attr('colspan');
         if (colspan) {
-            var selector;
-            for (var i = sortColumn ; i < sortColumn + parseFloat(colspan) ; i++) {
-                selector = selector + ', [data-sortcolumn="' + i + '"]';
-            }
-            var subHeader = $(selector).not('[colspan]');
-            var mainSort = subHeader.filter('[data-mainsort]').eq(0);
+            var mainSort = parseFloat($this.data('mainsort')) || 0;
+            var rowIndex = parseFloat($this.data('sortkey').split('-').pop());
 
-            sortColumn = mainSort.length ? mainSort : subHeader.eq(0);
-            doSort(sortColumn, $table);
-            return;
+            // If there is one more row in header, delve deeper
+            if ($table.find('thead tr').length - 1 > rowIndex) {
+                doSort($table.find('[data-sortkey="' + (sortColumn + mainSort) + '-' + (rowIndex + 1) + '"]'), $table);
+                return;
+            }
+            // Otherwise, just adjust the sortColumn
+            sortColumn = sortColumn + mainSort;
         }
 
         var localSignClass = $this.attr('data-defaultsign') || signClass;

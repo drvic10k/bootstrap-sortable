@@ -18,13 +18,30 @@
             <thead>
                 <tr>
                     <th style="width: 20%; vertical-align: middle;" rowspan="2" class='az' data-defaultsign="nospan" data-defaultsort="asc"><i class="fa fa-map-marker fa-fw"></i>Name</th>
-                    <th colspan="3" style="text-align: center;">Results</th>
+                    <th colspan="4" data-mainsort="3" style="text-align: center;">Results</th>
                     <th data-defaultsort="disabled"></th>
                 </tr>
                 <tr>
-                    <th style="width: 20%" data-firstsort="desc">Round 1</th>
+                    <th style="width: 20%" colspan="2" data-mainsort="1" data-firstsort="desc">Round 1</th>
                     <th style="width: 20%">Round 2</th>
-                    <th style="width: 20%" data-mainsort="true">Total</th>
+                    <th style="width: 20%">Total</th>
+                    <th style="width: 20%" data-defaultsign="month">Date</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <table class='table table-bordered table-striped sortable'>
+            <thead>
+                <tr>
+                    <th style="width: 20%; vertical-align: middle;" rowspan="2" class='az' data-defaultsign="nospan" data-defaultsort="asc"><i class="fa fa-map-marker fa-fw"></i>Name</th>
+                    <th colspan="4" data-mainsort="3" style="text-align: center;">Results</th>
+                    <th data-defaultsort="disabled"></th>
+                </tr>
+                <tr>
+                    <th style="width: 20%" colspan="2" data-mainsort="1" data-firstsort="desc">Round 1</th>
+                    <th style="width: 20%">Round 2</th>
+                    <th style="width: 20%">Total</th>
                     <th style="width: 20%" data-defaultsign="month">Date</th>
                 </tr>
             </thead>
@@ -98,7 +115,8 @@
             var newDate = moment(randomDate(new Date(2000, 0, 1), new Date())).format('D.M.YYYY');
             var value1 = Math.round(Math.random() * Math.random() * 100 * 100) / 100;
             var value2 = Math.round(Math.random() * Math.random() * 100 * 100) / 100;
-            return "<tr><td>" + randomName() + "</td><td>" + value1 + "</td><td>" + value2 + "</td><td>" + Math.round((value1 + value2) * 100) / 100 + "</td><td data-dateformat='D-M-YYYY'>" + newDate + "</td></tr>";
+            var value3 = Math.round(Math.random() * Math.random() * 100 * 100) / 100;
+            return "<tr><td>" + randomName() + "</td><td>" + value1 + "</td><td>" + value2 + "</td><td>" + value3 + "</td><td>" + Math.round((value1 + value2 + value3) * 100) / 100 + "</td><td data-dateformat='D-M-YYYY'>" + newDate + "</td></tr>";
         }
 
         function customSort() {
