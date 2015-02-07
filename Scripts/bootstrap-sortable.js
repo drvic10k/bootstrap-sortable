@@ -4,17 +4,23 @@
 (function ($) {
 
     var $document = $(document),
-        signClass;
+        signClass,
+        sortEngine;
 
-    $.bootstrapSortable = function (applyLast, sign) {
+    $.bootstrapSortable = function (applyLast, sign, customSort) {
 
-        // check if moment.js is available
+        // Check if moment.js is available
         var momentJsAvailable = (typeof moment !== 'undefined');
 
-        //Set class based on sign parameter
+        // Set class based on sign parameter
         signClass = !sign ? "arrow" : sign;
 
-        // set attributes needed for sorting
+        // Set sorting algorithm
+        if (customSort == 'default')
+            customSort = defaultSortEngine;
+        sortEngine = customSort || sortEngine || defaultSortEngine;
+        
+        // Set attributes needed for sorting
         $('table.sortable').each(function () {
             var $this = $(this),
                 context = lookupSortContext($this),
@@ -58,7 +64,7 @@
         });
     };
 
-    // add click event to table header
+    // Add click event to table header
     $document.on('click', 'table.sortable thead th[data-defaultsort!="disabled"]', function (e) {
         var $this = $(this), $table = $this.data('sortTable') || $this.closest('table.sortable');
         $table.trigger('before-sort');
@@ -77,7 +83,11 @@
         return context;
     }
 
-    //Sorting mechanism separated
+    function defaultSortEngine(rows, columnSelector, sortingParams) {
+        rows.tsort(columnSelector, sortingParams);
+    }
+
+    // Sorting mechanism separated
     function doSort($this, $table) {
         var sortColumn = $this.attr('data-sortcolumn'),
             context = lookupSortContext($table),
@@ -133,7 +143,7 @@
 
         // sort rows
         var rows = $table.children('tbody').children('tr');
-        rows.tsort('td:eq(' + sortColumn + ')', { order: bsSort[sortKey], attr: 'data-value' });
+        sortEngine(rows, 'td:eq(' + sortColumn + ')', { order: bsSort[sortKey], attr: 'data-value' });
 
         // add class to sorted column cells
         $table.find('td.sorted, th.sorted').removeClass('sorted');
