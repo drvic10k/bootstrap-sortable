@@ -1,7 +1,7 @@
 bootstrap-sortable
 ==================
 adding sorting ability to bootstrap table  
-Current version: 1.10.0
+Current version: 1.11.0
 
 In fact, it can be used for any tables.
 
@@ -31,7 +31,12 @@ After sorting a column, the table triggers an event `sorted`.
 ####Cell with `colspan` and multiple header rows:
 When you have multiple header rows, all header cells in the same column can be used to sort that column.
 
-When you have cell with `colspan`, by default, the first column of the span will be sorted. You can override this by using `data-mainsort` attribute for the column that you want to be sorted with the `colspan` cell.
+Cells with `colspan` can also be used for sorting. When not specified, the first column of the colspan will be used for sorting. You can override this by using `data-mainsort` attribute. (Use zero-based index as the value, `data-mainsort='1'` will sort the second column of the span.)
+
+If this cell is in the last row of the header, the sorting will be done according to this cell. If there is another row below, the cell in this row will be used. (i.e. the sorting sign, default-sort setting...)
+
+#####!BREAKING CHANGE!
+This changes the previous behaviour, where it only worked if the `colspan` cell was not in the last row and the `mainsort` had to be set on the cell in the next row. Now the `mainsort` is set on the `colspan` cell.
 
 ####Sorting direction signs:
 You can choose the sign that show the sort direcion. Default is the arrow pointing towards the heigher value.
