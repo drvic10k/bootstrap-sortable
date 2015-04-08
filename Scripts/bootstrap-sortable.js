@@ -1,10 +1,13 @@
-/*! tinysort.js
- * version: 2.1.1
- * author: Ron Valstar (http://www.sjeiti.com/)
- * license: MIT/GPL
- * build: 2015-01-05
+/**
+ * TinySort is a small script that sorts HTML elements. It sorts by text- or attribute value, or by that of one of it's children.
+ * @summary A nodeElement sorting script.
+ * @version 2.2.0
+ * @license MIT/GPL
+ * @author Ron Valstar <ron@ronvalstar.nl>
+ * @copyright Ron Valstar <ron@ronvalstar.nl>
+ * @namespace tinysort
  */
-!function (a, b) { "use strict"; function c() { return b } "function" == typeof define && define.amd ? define("tinysort", c) : a.tinysort = b }(this, function () { "use strict"; function a(a) { function f() { 0 === arguments.length ? j({}) : d(arguments, function (a) { j(c(a) ? { selector: a } : a) }), q = C.length } function j(a) { var b = !!a.selector, c = b && ":" === a.selector[0], d = e(a || {}, t); C.push(e({ bFind: b, bAttr: !(d.attr === i || "" === d.attr), bData: d.data !== i, bFilter: c, mFilter: i, fnSort: d.sortFunction, iAsc: "asc" === d.order ? 1 : -1 }, d)) } function m() { d(a, function (a, b) { x ? x !== a.parentNode && (D = !1) : x = a.parentNode; var c = C[0], d = c.bFilter, e = c.selector, f = !e || d && a.matchesSelector(e) || e && a.querySelector(e), g = f ? A : B, h = { elm: a, pos: b, posn: g.length }; z.push(h), g.push(h) }), w = A.slice(0) } function s() { A.sort(u) } function u(a, e) { var f = 0; for (0 !== r && (r = 0) ; 0 === f && q > r;) { var i = C[r], j = i.ignoreDashes ? o : n; if (d(p, function (a) { var b = a.prepare; b && b(i) }), i.sortFunction) f = i.sortFunction(a, e); else if ("rand" == i.order) f = Math.random() < .5 ? 1 : -1; else { var k = h, m = b(a, i), s = b(e, i); if (!i.forceStrings) { var t = c(m) ? m && m.match(j) : h, u = c(s) ? s && s.match(j) : h; if (t && u) { var v = m.substr(0, m.length - t[0].length), w = s.substr(0, s.length - u[0].length); v == w && (k = !h, m = l(t[0]), s = l(u[0])) } } f = m === g || s === g ? 0 : i.iAsc * (s > m ? -1 : m > s ? 1 : 0) } d(p, function (a) { var b = a.sort; b && (f = b(i, k, m, s, f)) }), 0 === f && r++ } return 0 === f && (f = a.pos > e.pos ? 1 : -1), f } function v() { var a = A.length === z.length; D && a ? (A.forEach(function (a) { y.appendChild(a.elm) }), x.appendChild(y)) : (A.forEach(function (a) { var b = a.elm, c = k.createElement("div"); a.ghost = c, b.parentNode.insertBefore(c, b) }), A.forEach(function (a, b) { var c = w[b].ghost; c.parentNode.insertBefore(a.elm, c), c.parentNode.removeChild(c) })) } c(a) && (a = k.querySelectorAll(a)), 0 === a.length && console.warn("No elements to sort"); var w, x, y = k.createDocumentFragment(), z = [], A = [], B = [], C = [], D = !0; return f.apply(i, Array.prototype.slice.call(arguments, 1)), m(), s(), v(), A.map(function (a) { return a.elm }) } function b(a, b) { var d, e = a.elm; return b.selector && (b.bFilter ? e.matchesSelector(b.selector) || (e = i) : e = e.querySelector(b.selector)), b.bAttr ? d = e.getAttribute(b.attr) : b.useVal ? d = e.value : b.bData ? d = e.getAttribute("data-" + b.data) : e && (d = e.textContent), c(d) && (b.cases || (d = d.toLowerCase()), d = d.replace(/\s+/g, " ")), d } function c(a) { return "string" == typeof a } function d(a, b) { for (var c, d = a.length, e = d; e--;) c = d - e - 1, b(a[c], c) } function e(a, b, c) { for (var d in b) (c || a[d] === g) && (a[d] = b[d]); return a } function f(a, b, c) { p.push({ prepare: a, sort: b, sortBy: c }) } var g, h = !1, i = null, j = window, k = j.document, l = parseFloat, m = Array.prototype.indexOf, n = /(-?\d+\.?\d*)$/g, o = /(\d+\.?\d*)$/g, p = [], q = 0, r = 0, s = "2.1.0", t = { selector: i, order: "asc", attr: i, data: i, useVal: h, place: "start", returns: h, cases: h, forceStrings: h, ignoreDashes: h, sortFunction: i }; return j.Element && function (a) { a.matchesSelector = a.matchesSelector || a.mozMatchesSelector || a.msMatchesSelector || a.oMatchesSelector || a.webkitMatchesSelector || function (a) { for (var b = this, c = (b.parentNode || b.document).querySelectorAll(a), d = -1; c[++d] && c[d] != b;); return !!c[d] } }(Element.prototype), e(f, { indexOf: m, loop: d }), e(a, { plugin: f, version: s, defaults: t }) }());
+!function (a, b) { "use strict"; function c() { return b } "function" == typeof define && define.amd ? define("tinysort", c) : a.tinysort = b }(this, function () { "use strict"; function a(a, f) { function j() { 0 === arguments.length ? s({}) : d(arguments, function (a) { s(c(a) ? { selector: a } : a) }), p = D.length } function s(a) { var b = !!a.selector, c = b && ":" === a.selector[0], d = e(a || {}, r); D.push(e({ hasSelector: b, hasAttr: !(d.attr === i || "" === d.attr), hasData: d.data !== i, hasFilter: c, sortReturnNumber: "asc" === d.order ? 1 : -1 }, d)) } function t() { d(a, function (a, b) { y ? y !== a.parentNode && (E = !1) : y = a.parentNode; var c = D[0], d = c.hasFilter, e = c.selector, f = !e || d && a.matchesSelector(e) || e && a.querySelector(e), g = f ? B : C, h = { elm: a, pos: b, posn: g.length }; A.push(h), g.push(h) }), x = B.slice(0) } function u() { B.sort(v) } function v(a, e) { var f = 0; for (0 !== q && (q = 0) ; 0 === f && p > q;) { var i = D[q], j = i.ignoreDashes ? n : m; if (d(o, function (a) { var b = a.prepare; b && b(i) }), i.sortFunction) f = i.sortFunction(a, e); else if ("rand" == i.order) f = Math.random() < .5 ? 1 : -1; else { var k = h, r = b(a, i), s = b(e, i), t = "" === r || r === g, u = "" === s || s === g; if (r === s) f = 0; else if (i.emptyEnd && (t || u)) f = t && u ? 0 : t ? 1 : -1; else { if (!i.forceStrings) { var v = c(r) ? r && r.match(j) : h, w = c(s) ? s && s.match(j) : h; if (v && w) { var x = r.substr(0, r.length - v[0].length), y = s.substr(0, s.length - w[0].length); x == y && (k = !h, r = l(v[0]), s = l(w[0])) } } f = r === g || s === g ? 0 : s > r ? -1 : r > s ? 1 : 0 } } d(o, function (a) { var b = a.sort; b && (f = b(i, k, r, s, f)) }), f *= i.sortReturnNumber, 0 === f && q++ } return 0 === f && (f = a.pos > e.pos ? 1 : -1), f } function w() { var a = B.length === A.length; E && a ? F ? B.forEach(function (a, b) { a.elm.style.order = b }) : (B.forEach(function (a) { z.appendChild(a.elm) }), y.appendChild(z)) : (B.forEach(function (a) { var b = a.elm, c = k.createElement("div"); a.ghost = c, b.parentNode.insertBefore(c, b) }), B.forEach(function (a, b) { var c = x[b].ghost; c.parentNode.insertBefore(a.elm, c), c.parentNode.removeChild(c) })) } c(a) && (a = k.querySelectorAll(a)), 0 === a.length && console.warn("No elements to sort"); var x, y, z = k.createDocumentFragment(), A = [], B = [], C = [], D = [], E = !0, F = a.length && (f === g || f.useFlex !== !1) && -1 !== getComputedStyle(a[0].parentNode, null).display.indexOf("flex"); return j.apply(i, Array.prototype.slice.call(arguments, 1)), t(), u(), w(), B.map(function (a) { return a.elm }) } function b(a, b) { var d, e = a.elm; return b.selector && (b.hasFilter ? e.matchesSelector(b.selector) || (e = i) : e = e.querySelector(b.selector)), b.hasAttr ? d = e.getAttribute(b.attr) : b.useVal ? d = e.value || e.getAttribute("value") : b.hasData ? d = e.getAttribute("data-" + b.data) : e && (d = e.textContent), c(d) && (b.cases || (d = d.toLowerCase()), d = d.replace(/\s+/g, " ")), d } function c(a) { return "string" == typeof a } function d(a, b) { for (var c, d = a.length, e = d; e--;) c = d - e - 1, b(a[c], c) } function e(a, b, c) { for (var d in b) (c || a[d] === g) && (a[d] = b[d]); return a } function f(a, b, c) { o.push({ prepare: a, sort: b, sortBy: c }) } var g, h = !1, i = null, j = window, k = j.document, l = parseFloat, m = /(-?\d+\.?\d*)\s*$/g, n = /(\d+\.?\d*)\s*$/g, o = [], p = 0, q = 0, r = { selector: i, order: "asc", attr: i, data: i, useVal: h, place: "start", returns: h, cases: h, forceStrings: h, ignoreDashes: h, sortFunction: i, useFlex: h, emptyEnd: h }; return j.Element && function (a) { a.matchesSelector = a.matchesSelector || a.mozMatchesSelector || a.msMatchesSelector || a.oMatchesSelector || a.webkitMatchesSelector || function (a) { for (var b = this, c = (b.parentNode || b.document).querySelectorAll(a), d = -1; c[++d] && c[d] != b;); return !!c[d] } }(Element.prototype), e(f, { loop: d }), e(a, { plugin: f, defaults: r }) }());
 
 (function ($) {
 
@@ -27,9 +30,7 @@
 
         // Set attributes needed for sorting
         $('table.sortable').each(function () {
-            var $this = $(this),
-                context = lookupSortContext($this),
-                bsSort = context.bsSort;
+            var $this = $(this);
             applyLast = (applyLast === true);
             $this.find('span.sign').remove();
 
@@ -76,6 +77,10 @@
                     $this.attr('data-value') === undefined && $this.attr('data-value', $this.text());
                 }
             });
+
+            var context = lookupSortContext($this),
+                bsSort = context.bsSort;
+
             $this.find('thead th[data-defaultsort!="disabled"]').each(function (index) {
                 var $this = $(this);
                 var $sortTable = $this.closest('table.sortable');
@@ -104,8 +109,16 @@
     // This allows multiple tables on one page without collisions.
     function lookupSortContext($table) {
         var context = $table.data("bootstrap-sortable-context");
-        if (context == null) {
-            context = { bsSort: [], lastSort: null };
+        if (context === undefined) {
+            context = { bsSort: [], lastSort: undefined };
+            $table.find('thead th[data-defaultsort!="disabled"]').each(function (index) {
+                var $this = $(this);
+                var sortKey = $this.attr('data-sortkey');
+                context.bsSort[sortKey] = $this.attr('data-defaultsort');
+                if (context.bsSort[sortKey] !== undefined) {
+                    context.lastSort = sortKey;
+                }
+            });
             $table.data("bootstrap-sortable-context", context);
         }
         return context;
@@ -123,7 +136,7 @@
 
         var colspan = $this.attr('colspan');
         if (colspan) {
-            var mainSort = Math.min(colspan - 1, parseFloat($this.data('mainsort')) || 0);
+            var mainSort = parseFloat($this.data('mainsort')) || 0;
             var rowIndex = parseFloat($this.data('sortkey').split('-').pop());
 
             // If there is one more row in header, delve deeper
