@@ -39,9 +39,9 @@ If this cell is in the last row of the header, the sorting will be done accordin
 This changes the previous behaviour, where it only worked if the `colspan` cell was not in the last row and the `mainsort` had to be set on the cell in the next row. Now the `mainsort` is set on the `colspan` cell.
 
 ####Sorting direction signs:
-You can choose the sign that show the sort direcion. Default is the arrow pointing towards the heigher value.
+You can choose the sign that show the sort direcion. Default is the arrow pointing towards the higher value.
 
-This proved to be contra-intuitive for some, so you can change it to opposite using the second parameter: `$.bootstrapSortable(applyLast, 'reversed')`.
+This proved to be counterintuitive for some, so you can change it to opposite using the second parameter: `$.bootstrapSortable(applyLast, 'reversed')`.
 
 Other possible values are `'az'`, `'AZ'`, `'_19'`, `'month'`. (See [demo](http://htmlpreview.github.io/?https://github.com/drvic10k/bootstrap-sortable/blob/gh-pages/index.html) to see how it looks.)
 
