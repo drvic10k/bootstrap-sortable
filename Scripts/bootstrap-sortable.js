@@ -184,7 +184,9 @@
 
         // sort rows
         var rows = $table.children('tbody').children('tr');
-        sortEngine(rows, { selector: 'td:nth-child(' + (sortColumn + 1) + ')', order: bsSort[sortKey], data: 'value' });
+        if (rows.length != 0) {
+            sortEngine(rows, { selector: 'td:nth-child(' + (sortColumn + 1) + ')', order: bsSort[sortKey], data: 'value' });
+        }
 
         // add class to sorted column cells
         $table.find('td.sorted, th.sorted').removeClass('sorted');
