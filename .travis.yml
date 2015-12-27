@@ -1,6 +1,6 @@
 ﻿language: node_js
 node_js:
-    - "0.10"
+    - "node"
 script: node_modules/karma/bin/karma start karma.conf.js --single-run
 before_install:
     - export DISPLAY=:99.0
