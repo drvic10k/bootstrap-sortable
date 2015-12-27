@@ -57,27 +57,38 @@
             // Set indexes to header cells
             $this.find('thead tr').each(function (rowIndex) {
                 $(this).find('th').each(function (columnIndex) {
-                    var $this = $(this);
-                    $this.addClass('nosort').removeClass('up down');
-                    $this.attr('data-sortcolumn', columnIndex);
-                    $this.attr('data-sortkey', columnIndex + '-' + rowIndex);
+                    var $header = $(this);
+                    $header.addClass('nosort').removeClass('up down');
+                    $header.attr('data-sortcolumn', columnIndex);
+                    $header.attr('data-sortkey', columnIndex + '-' + rowIndex);
                 });
             });
 
             // Cleanup placeholder cells
             $this.find('thead .rowspan-compensate, .colspan-compensate').remove();
 
+            $this.find('th').each(function() {
+                var $header = $(this);
+                if ($header.attr('data-dateformat') !== undefined && momentJsAvailable) {
+                    var colNumber = $header.attr('data-sortcolumn');
+                    $this.find('td:nth-child(' + (colNumber + 1) + ')').each(function() {
+                        var $cell = $(this);
+                        $cell.attr('data-value', moment($cell.text(), $header.attr('data-dateformat')).format('YYYY/MM/DD/HH/mm/ss'));
+                    });
+                }
+            });
+
             // Initialize sorting values
             $this.find('td').each(function () {
-                var $this = $(this);
-                if ($this.attr('data-dateformat') !== undefined && momentJsAvailable) {
-                    $this.attr('data-value', moment($this.text(), $this.attr('data-dateformat')).format('YYYY/MM/DD/HH/mm/ss'));
+                var $cell = $(this);
+                if ($cell.attr('data-dateformat') !== undefined && momentJsAvailable) {
+                    $cell.attr('data-value', moment($cell.text(), $cell.attr('data-dateformat')).format('YYYY/MM/DD/HH/mm/ss'));
                 }
-                else if ($this.attr('data-valueprovider') !== undefined) {
-                    $this.attr('data-value', new RegExp($this.attr('data-valueprovider')).exec($this.text())[0]);
+                else if ($cell.attr('data-valueprovider') !== undefined) {
+                    $cell.attr('data-value', new RegExp($cell.attr('data-valueprovider')).exec($cell.text())[0]);
                 }
                 else {
-                    $this.attr('data-value') === undefined && $this.attr('data-value', $this.text());
+                    $cell.attr('data-value') === undefined && $cell.attr('data-value', $cell.text());
                 }
             });
 
@@ -85,15 +96,15 @@
                 bsSort = context.bsSort;
 
             $this.find('thead th[data-defaultsort!="disabled"]').each(function (index) {
-                var $this = $(this);
-                var $sortTable = $this.closest('table.sortable');
-                $this.data('sortTable', $sortTable);
-                var sortKey = $this.attr('data-sortkey');
+                var $header = $(this);
+                var $sortTable = $header.closest('table.sortable');
+                $header.data('sortTable', $sortTable);
+                var sortKey = $header.attr('data-sortkey');
                 var thisLastSort = applyLast ? context.lastSort : -1;
-                bsSort[sortKey] = applyLast ? bsSort[sortKey] : $this.attr('data-defaultsort');
+                bsSort[sortKey] = applyLast ? bsSort[sortKey] : $header.attr('data-defaultsort');
                 if (bsSort[sortKey] !== undefined && (applyLast === (sortKey === thisLastSort))) {
                     bsSort[sortKey] = bsSort[sortKey] === 'asc' ? 'desc' : 'asc';
-                    doSort($this, $sortTable);
+                    doSort($header, $sortTable);
                 }
             });
             $this.trigger('sorted');
