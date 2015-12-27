@@ -1,4 +1,5 @@
 ﻿language: node_js
+sudo: required
 node_js:
     - "4.2"
 before_install:
@@ -8,7 +9,4 @@ before_install:
   - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
   - sudo dpkg -i google-chrome*.deb
 script: node_modules/karma/bin/karma start karma.conf.js --single-run
-# whitelist
-branches:
-  only:
-    - CI setup
+
