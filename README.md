@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/drvic10k/bootstrap-sortable.svg?branch=master)](https://travis-ci.org/drvic10k/bootstrap-sortable)
+
 bootstrap-sortable
 ==================
 adding sorting ability to bootstrap table  
