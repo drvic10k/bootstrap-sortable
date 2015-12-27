@@ -1,0 +1,30 @@
+{
+  "name": "bootstrap-sortable",
+  "version": "1.11.2",
+  "description": "adding sorting ability to HTML tables",
+  "main": "index.js",
+  "scripts": {
+    "test": "karma start karma.conf.js --single-run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/drvic10k/bootstrap-sortable.git"
+  },
+  "author": "Matus Brlit <https://github.com/drvic10k>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/drvic10k/bootstrap-sortable/issues"
+  },
+  "homepage": "https://github.com/drvic10k/bootstrap-sortable#readme",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "jasmine-core": "^2.4.1",
+    "jasmine-jquery": "^2.1.1",
+    "jasmine2-custom-message": "^0.8.0",
+    "jquery": "^2.1.4",
+    "karma": "^0.13.16",
+    "karma-chrome-launcher": "^0.2.2",
+    "karma-firefox-launcher": "^0.1.7",
+    "karma-jasmine": "^0.3.6"
+  }
+}

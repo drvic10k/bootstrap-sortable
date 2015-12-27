@@ -73,6 +73,9 @@
                 if ($this.attr('data-dateformat') !== undefined && momentJsAvailable) {
                     $this.attr('data-value', moment($this.text(), $this.attr('data-dateformat')).format('YYYY/MM/DD/HH/mm/ss'));
                 }
+                else if ($this.attr('data-valueprovider') !== undefined) {
+                    $this.attr('data-value', new RegExp($this.attr('data-valueprovider')).exec($this.text())[0]);
+                }
                 else {
                     $this.attr('data-value') === undefined && $this.attr('data-value', $this.text());
                 }
