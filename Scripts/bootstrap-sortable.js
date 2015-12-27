@@ -70,7 +70,7 @@
             $this.find('th').each(function() {
                 var $header = $(this);
                 if ($header.attr('data-dateformat') !== undefined && momentJsAvailable) {
-                    var colNumber = $header.attr('data-sortcolumn');
+                    var colNumber = parseFloat($header.attr('data-sortcolumn'));
                     $this.find('td:nth-child(' + (colNumber + 1) + ')').each(function() {
                         var $cell = $(this);
                         $cell.attr('data-value', moment($cell.text(), $header.attr('data-dateformat')).format('YYYY/MM/DD/HH/mm/ss'));
