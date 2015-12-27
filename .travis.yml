@@ -2,11 +2,12 @@
 sudo: required
 node_js:
     - "4.2"
-before_script:
+install:
   - export CHROME_BIN=/usr/bin/google-chrome
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
   - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
   - sudo dpkg -i google-chrome*.deb
+  - npm install
 script: node_modules/karma/bin/karma start karma.conf.js --single-run
 
