@@ -15,8 +15,22 @@
         signClass,
         sortEngine;
 
-    $.bootstrapSortable = function (applyLast, sign, customSort) {
+    $.bootstrapSortable = function (options) {
+        if (options == undefined) {
+            initialize();
+        }
+        else if (options.constructor === Boolean) {
+            initialize(options);
+        }
+        else if (options.sortingHeader !== undefined) {
+            sortColumn(options.sortingHeader);
+        }
+        else {
+            initialize(options.applyLast, options.sign, options.customSort);
+        }
+    };
 
+    function initialize(applyLast, sign, customSort) {
         // Check if moment.js is available
         var momentJsAvailable = (typeof moment !== 'undefined');
 
@@ -67,13 +81,21 @@
             // Cleanup placeholder cells
             $this.find('thead .rowspan-compensate, .colspan-compensate').remove();
 
-            $this.find('th').each(function() {
+            // Initialize sorting values specified in header
+            $this.find('th').each(function () {
                 var $header = $(this);
                 if ($header.attr('data-dateformat') !== undefined && momentJsAvailable) {
                     var colNumber = parseFloat($header.attr('data-sortcolumn'));
-                    $this.find('td:nth-child(' + (colNumber + 1) + ')').each(function() {
+                    $this.find('td:nth-child(' + (colNumber + 1) + ')').each(function () {
                         var $cell = $(this);
                         $cell.attr('data-value', moment($cell.text(), $header.attr('data-dateformat')).format('YYYY/MM/DD/HH/mm/ss'));
+                    });
+                }
+                else if ($header.attr('data-valueprovider') !== undefined) {
+                    var colNumber = parseFloat($header.attr('data-sortcolumn'));
+                    $this.find('td:nth-child(' + (colNumber + 1) + ')').each(function () {
+                        var $cell = $(this);
+                        $cell.attr('data-value', new RegExp($header.attr('data-valueprovider')).exec($cell.text())[0]);
                     });
                 }
             });
@@ -109,15 +131,20 @@
             });
             $this.trigger('sorted');
         });
-    };
+    }
 
     // Add click event to table header
     $document.on('click', 'table.sortable>thead th[data-defaultsort!="disabled"]', function (e) {
-        var $this = $(this), $table = $this.data('sortTable') || $this.closest('table.sortable');
+        sortColumn(this);
+    });
+
+    // element is the header of the column to sort (the clicked header)
+    function sortColumn(element) {
+        var $this = $(element), $table = $this.data('sortTable') || $this.closest('table.sortable');
         $table.trigger('before-sort');
         doSort($this, $table);
         $table.trigger('sorted');
-    });
+    }
 
     // Look up sorting data appropriate for the specified table (jQuery element).
     // This allows multiple tables on one page without collisions.

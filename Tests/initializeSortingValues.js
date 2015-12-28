@@ -25,4 +25,16 @@ describe('Initializing sorting values', function () {
         var cell = $('#regex');
         expect(cell).toHaveData('value', 10);
     });
+
+    describe('Format in header', function() {
+        it("Correctly applied date format", function () {
+            var cell = $('#dateHeader');
+            expect(cell).toHaveData('value', '2012/03/22/00/00/00');
+        });
+
+        it("Correctly applied regex value", function () {
+            var cell = $('#regexHeader');
+            expect(cell).toHaveData('value', 10);
+        });
+    });
 })
