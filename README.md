@@ -2,10 +2,8 @@
 
 bootstrap-sortable
 ==================
-adding sorting ability to bootstrap table  
-Current version: 1.11.2
-
-In fact, it can be used for any tables.
+adding sorting ability to HTML tables with Bootstrap styling
+Current version: 1.12.0 / 2.0.0
 
 Sorting provided by [TinySort](https://github.com/Sjeiti/TinySort).
 Date parsing provided by [moment.js](https://github.com/timrwood/moment/).
@@ -14,6 +12,8 @@ Available for download with NuGet, search for `bootstrap-sortable`.
 Working [demo](http://drvic10k.github.io/bootstrap-sortable/).
 
 For compatibility issues with older browsers and possible workarounds, please look into the [issues list](https://github.com/drvic10k/bootstrap-sortable/issues?labels=compatibility&page=1&state=closed).
+
+In version 2, the parameters to `$.bootstrapSortable` funcion were changed to single Object. For basic compatibility, you can still use single Boolean parameter (applyLast), other parameters are passed as properties of the Object.
 
 ####Dependencies:
 You should add the provided "moment.js" library, or get yourself a copy from http://momentjs.com.
