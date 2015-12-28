@@ -223,15 +223,33 @@
             $this.addClass('down').removeClass('up nosort');
         }
 
-        // sort rows
+        // remove rows that should not be sorted
         var rows = $table.children('tbody').children('tr');
-        if (rows.length != 0) {
-            sortEngine(rows, { selector: 'td:nth-child(' + (sortColumn + 1) + ')', order: bsSort[sortKey], data: 'value' });
+        var fixedRows = [];
+        $(rows.filter('[data-disable-sorting="true"]').get().reverse()).each(function (index, fixedRow) {
+            var $fixedRow = $(fixedRow);
+            fixedRows.push({ index: rows.index($fixedRow), row: $fixedRow });
+            $fixedRow.remove();
+        });
+
+        // sort rows
+        var rowsToSort = rows.not('[data-disable-sorting="true"]');
+        if (rowsToSort.length != 0) {
+            sortEngine(rowsToSort, { selector: 'td:nth-child(' + (sortColumn + 1) + ')', order: bsSort[sortKey], data: 'value' });
         }
+
+        // add back the fixed rows
+        $(fixedRows.reverse()).each(function (index, row) {
+            if (row.index === 0) {
+                $table.children('tbody').prepend(row.row);
+            } else {
+                $table.children('tbody').children('tr').eq(row.index - 1).after(row.row);
+            }
+        });
 
         // add class to sorted column cells
         $table.find('td.sorted, th.sorted').removeClass('sorted');
-        rows.find('td:eq(' + sortColumn + ')').addClass('sorted');
+        rowsToSort.find('td:eq(' + sortColumn + ')').addClass('sorted');
         $this.addClass('sorted');
     }
 
