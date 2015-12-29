@@ -24,7 +24,7 @@
             initialize({ applyLast: options });
         }
         else if (options.sortingHeader !== undefined) {
-            sortColumn(options.sortingHeader);
+            sortByColumn(options.sortingHeader);
         }
         else {
             initialize(options);
@@ -138,11 +138,11 @@
 
     // Add click event to table header
     $document.on('click', 'table.sortable>thead th[data-defaultsort!="disabled"]', function (e) {
-        sortColumn(this);
+        sortByColumn(this);
     });
 
     // element is the header of the column to sort (the clicked header)
-    function sortColumn(element) {
+    function sortByColumn(element) {
         var $this = $(element), $table = $this.data('sortTable') || $this.closest('table.sortable');
         $table.trigger('before-sort');
         doSort($this, $table);
@@ -217,8 +217,13 @@
         var sortKey = $this.attr('data-sortkey');
         var initialDirection = $this.attr('data-firstsort') !== 'desc' ? 'desc' : 'asc';
 
+        var newDirection = (bsSort[sortKey] || initialDirection);
+        if (context.lastSort === sortKey || bsSort[sortKey] === undefined) {
+            newDirection = newDirection === 'asc' ? 'desc' : 'asc';
+        }
+        bsSort[sortKey] = newDirection;
         context.lastSort = sortKey;
-        bsSort[sortKey] = (bsSort[sortKey] || initialDirection) === 'asc' ? 'desc' : 'asc';
+
         if (bsSort[sortKey] === 'desc') {
             $this.find('span.sign').addClass('up');
             $this.addClass('up').removeClass('down nosort');
