@@ -13,39 +13,42 @@
 
     var $document = $(document),
         signClass,
-        sortEngine;
+        sortEngine,
+        emptyEnd;
 
     $.bootstrapSortable = function (options) {
         if (options == undefined) {
-            initialize();
+            initialize({});
         }
         else if (options.constructor === Boolean) {
-            initialize(options);
+            initialize({ applyLast: options });
         }
         else if (options.sortingHeader !== undefined) {
             sortColumn(options.sortingHeader);
         }
         else {
-            initialize(options.applyLast, options.sign, options.customSort);
+            initialize(options);
         }
     };
 
-    function initialize(applyLast, sign, customSort) {
+    function initialize(options) {
         // Check if moment.js is available
         var momentJsAvailable = (typeof moment !== 'undefined');
 
         // Set class based on sign parameter
-        signClass = !sign ? "arrow" : sign;
+        signClass = !options.sign ? "arrow" : options.sign;
 
         // Set sorting algorithm
-        if (customSort == 'default')
-            customSort = defaultSortEngine;
-        sortEngine = customSort || sortEngine || defaultSortEngine;
+        if (options.customSort == 'default')
+            options.customSort = defaultSortEngine;
+        sortEngine = options.customSort || sortEngine || defaultSortEngine;
+
+        emptyEnd = options.emptyEnd;
 
         // Set attributes needed for sorting
         $('table.sortable').each(function () {
             var $this = $(this);
-            applyLast = (applyLast === true);
+            var applyLast = (options.applyLast === true);
             $this.find('span.sign').remove();
 
             // Add placeholder cells for colspans
@@ -226,16 +229,17 @@
         // remove rows that should not be sorted
         var rows = $table.children('tbody').children('tr');
         var fixedRows = [];
-        $(rows.filter('[data-disable-sorting="true"]').get().reverse()).each(function (index, fixedRow) {
+        $(rows.filter('[data-disablesort="true"]').get().reverse()).each(function (index, fixedRow) {
             var $fixedRow = $(fixedRow);
             fixedRows.push({ index: rows.index($fixedRow), row: $fixedRow });
             $fixedRow.remove();
         });
 
         // sort rows
-        var rowsToSort = rows.not('[data-disable-sorting="true"]');
+        var rowsToSort = rows.not('[data-disablesort="true"]');
         if (rowsToSort.length != 0) {
-            sortEngine(rowsToSort, { selector: 'td:nth-child(' + (sortColumn + 1) + ')', order: bsSort[sortKey], data: 'value' });
+            var emptySorting = bsSort[sortKey] === 'asc' ? emptyEnd : false;
+            sortEngine(rowsToSort, { emptyEnd: emptySorting, selector: 'td:nth-child(' + (sortColumn + 1) + ')', order: bsSort[sortKey], data: 'value' });
         }
 
         // add back the fixed rows
