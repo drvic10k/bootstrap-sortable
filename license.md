@@ -1,4 +1,4 @@
-Copyright (c) 2013 Matúš Brliť (drvic10k), bootstrap-sortable contributors
+Copyright (c) 2016 Matúš Brliť (drvic10k), bootstrap-sortable contributors
 
 Copyright (c) 2011-2013 Tim Wood, Iskren Chernev, Moment.js contributors
 
