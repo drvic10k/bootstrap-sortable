@@ -17,7 +17,8 @@ module.exports = function (config) {
             'node_modules/jasmine2-custom-message/jasmine2-custom-message.js',
             { pattern: 'Tests/*.html', included: true },
             { pattern: 'Tests/*.js', included: true },
-            { pattern: 'Scripts/*.js', included: true }
+            'Scripts/moment.min.js',
+            'Scripts/bootstrap-sortable.js'
         ],
 
 
