@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Bootstrap Sortable Tables</title>
+</head>
+<body>
+    <table class="table table-striped table-bordered sortable">
+        <thead>
+            <tr>
+                <th data-defaultsort="asc">head1</th>
+                <th id="outerh2">head2</th>
+                <th>head3</th>
+                <th>head4</th>
+            </tr>
+        </thead>
+        <tbody id="outer">
+            <tr>
+                <td>2</td>
+                <td>hi</td>
+                <td>2015/04/08</td>
+                <td>5.234</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>yeah</td>
+                <td>2013/03/16</td>
+                <td>548.2154</td>
+            </tr>
+            <tr id="outerFirst">
+                <td>1</td>
+                <td>test</td>
+                <td>2005/10/24</td>
+                <td>1.547</td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <table class="table table-striped table-bordered sortable">
+                        <thead>
+                            <tr>
+                                <th id="innerh1" data-defaultsort="asc">head1</th>
+                                <th>head2</th>
+                                <th>head3</th>
+                                <th>head4</th>
+                            </tr>
+                        </thead>
+                        <tbody  id="inner">
+                            <tr>
+                                <td>2</td>
+                                <td>hi</td>
+                                <td>2015/04/08</td>
+                                <td>5.234</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>yeah</td>
+                                <td>2013/03/16</td>
+                                <td>548.2154</td>
+                            </tr>
+                            <tr id="innerFirst">
+                                <td>1</td>
+                                <td>test</td>
+                                <td>2005/10/24</td>
+                                <td>1.547</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

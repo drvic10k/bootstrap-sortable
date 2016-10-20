@@ -68,7 +68,7 @@
             $this.find('span.sign').remove();
 
             // Add placeholder cells for colspans
-            $this.find('thead [colspan]').each(function () {
+            $this.find('> thead [colspan]').each(function () {
                 var colspan = parseFloat($(this).attr('colspan'));
                 for (var i = 1; i < colspan; i++) {
                     $(this).after('<th class="colspan-compensate">');
@@ -76,7 +76,7 @@
             });
 
             // Add placeholder cells for rowspans
-            $this.find('thead [rowspan]').each(function () {
+            $this.find('> thead [rowspan]').each(function () {
                 var $cell = $(this);
                 var rowspan = parseFloat($cell.attr('rowspan'));
                 for (var i = 1; i < rowspan; i++) {
@@ -88,7 +88,7 @@
             });
 
             // Set indexes to header cells
-            $this.find('thead tr').each(function (rowIndex) {
+            $this.find('> thead tr').each(function (rowIndex) {
                 $(this).find('th').each(function (columnIndex) {
                     var $header = $(this);
                     $header.addClass('nosort').removeClass('up down');
@@ -98,7 +98,7 @@
             });
 
             // Cleanup placeholder cells
-            $this.find('thead .rowspan-compensate, .colspan-compensate').remove();
+            $this.find('> thead .rowspan-compensate, .colspan-compensate').remove();
 
             // Initialize sorting values specified in header
             $this.find('th').each(function () {
@@ -136,7 +136,7 @@
             var context = lookupSortContext($this),
                 bsSort = context.bsSort;
 
-            $this.find('thead th[data-defaultsort!="disabled"]').each(function (index) {
+            $this.find('> thead th[data-defaultsort!="disabled"]').each(function (index) {
                 var $header = $(this);
                 var $sortTable = $header.closest('table.sortable');
                 $header.data('sortTable', $sortTable);
@@ -168,7 +168,7 @@
         var context = $table.data("bootstrap-sortable-context");
         if (context === undefined) {
             context = { bsSort: [], lastSort: undefined };
-            $table.find('thead th[data-defaultsort!="disabled"]').each(function (index) {
+            $table.find('> thead th[data-defaultsort!="disabled"]').each(function (index) {
                 var $this = $(this);
                 var sortKey = $this.attr('data-sortkey');
                 context.bsSort[sortKey] = $this.attr('data-defaultsort');
@@ -199,7 +199,7 @@
             var rowIndex = parseFloat($this.data('sortkey').split('-').pop());
 
             // If there is one more row in header, delve deeper
-            if ($table.find('thead tr').length - 1 > rowIndex) {
+            if ($table.find('> thead tr').length - 1 > rowIndex) {
                 doSort($table.find('[data-sortkey="' + (sortColumn + mainSort) + '-' + (rowIndex + 1) + '"]'), $table);
                 return;
             }
@@ -210,12 +210,12 @@
         var localSignClass = $this.attr('data-defaultsign') || signClass;
 
         // update arrow icon
-        $table.find('th').each(function () {
+        $table.find('> thead th').each(function () {
             $(this).removeClass('up').removeClass('down').addClass('nosort');
         });
 
         if ($.browser.mozilla) {
-            var moz_arrow = $table.find('div.mozilla');
+            var moz_arrow = $table.find('> thead div.mozilla');
             if (moz_arrow !== undefined) {
                 moz_arrow.find('.sign').remove();
                 moz_arrow.parent().html(moz_arrow.html());
@@ -224,7 +224,7 @@
             $this.children().eq(0).append('<span class="sign ' + localSignClass + '"></span>');
         }
         else {
-            $table.find('span.sign').remove();
+            $table.find('> thead span.sign').remove();
             $this.append('<span class="sign ' + localSignClass + '"></span>');
         }
 
@@ -272,7 +272,7 @@
         });
 
         // add class to sorted column cells
-        $table.find('td.sorted, th.sorted').removeClass('sorted');
+        $table.find('> tbody > tr > td.sorted,> thead th.sorted').removeClass('sorted');
         rowsToSort.find('td:eq(' + sortColumn + ')').addClass('sorted');
         $this.addClass('sorted');
         $table.trigger('sorted');
