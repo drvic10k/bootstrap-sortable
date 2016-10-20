@@ -4,7 +4,7 @@
 bootstrap-sortable
 ==================
 adding sorting ability to HTML tables with Bootstrap styling
-Current version: 1.12.0 / 2.0.0
+Current version: 1.12.0 / 2.0.1
 
 Sorting provided by [TinySort](https://github.com/Sjeiti/TinySort).
 Date parsing provided by [moment.js](https://github.com/timrwood/moment/).
@@ -26,7 +26,7 @@ HTML table has to be properly formated, using `<thead>`, `<th>` and `<tbody>` el
 
 You can disable sorting for a column by using `data-defaultsort='disabled'` attribute in the `<th>` element.
 
-When you add table rows or whole table from client side, use `$.bootstrapSortable(applyLast)` function to add sortability to parts/tables that were not present at document.ready.
+When you add table rows or whole table from client side, use `$.bootstrapSortable({ applyLast: true })` function to add sortability to parts/tables that were not present at document.ready.
 Use optional paramater `applyLast=true` if you want to preserve the last used sorting.
 
 After sorting a column, the table triggers an event `sorted`.
@@ -44,7 +44,7 @@ This changes the previous behaviour, where it only worked if the `colspan` cell 
 ####Sorting direction signs:
 You can choose the sign that show the sort direcion. Default is the arrow pointing towards the higher value.
 
-This proved to be counterintuitive for some, so you can change it to opposite using the second parameter: `$.bootstrapSortable(applyLast, 'reversed')`.
+This proved to be counterintuitive for some, so you can change it to opposite using the second parameter: `$.bootstrapSortable({ sign: 'reversed' })`.
 
 Other possible values are `'az'`, `'AZ'`, `'_19'`, `'month'`. (See [demo](http://htmlpreview.github.io/?https://github.com/drvic10k/bootstrap-sortable/blob/gh-pages/index.html) to see how it looks.)
 
