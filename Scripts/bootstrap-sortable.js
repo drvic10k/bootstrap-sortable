@@ -148,7 +148,6 @@
                     doSort($header, $sortTable);
                 }
             });
-            $this.trigger('sorted');
         });
     }
 
@@ -160,9 +159,7 @@
     // element is the header of the column to sort (the clicked header)
     function sortByColumn(element) {
         var $this = $(element), $table = $this.data('sortTable') || $this.closest('table.sortable');
-        $table.trigger('before-sort');
         doSort($this, $table);
-        $table.trigger('sorted');
     }
 
     // Look up sorting data appropriate for the specified table (jQuery element).
@@ -190,6 +187,8 @@
 
     // Sorting mechanism separated
     function doSort($this, $table) {
+        $table.trigger('before-sort');
+
         var sortColumn = parseFloat($this.attr('data-sortcolumn')),
             context = lookupSortContext($table),
             bsSort = context.bsSort;
@@ -276,6 +275,7 @@
         $table.find('td.sorted, th.sorted').removeClass('sorted');
         rowsToSort.find('td:eq(' + sortColumn + ')').addClass('sorted');
         $this.addClass('sorted');
+        $table.trigger('sorted');
     }
 
     // jQuery 1.9 removed this object
