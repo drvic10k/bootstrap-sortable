@@ -1,5 +1,4 @@
 [![Build Status](https://travis-ci.org/drvic10k/bootstrap-sortable.svg?branch=master)](https://travis-ci.org/drvic10k/bootstrap-sortable)
-[![Issue Stats](http://issuestats.com/github/drvic10k/bootstrap-sortable/badge/issue?style=flat)](http://issuestats.com/github/drvic10k/bootstrap-sortable)
 
 bootstrap-sortable
 ==================
