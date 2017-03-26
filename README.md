@@ -3,7 +3,7 @@
 bootstrap-sortable
 ==================
 adding sorting ability to HTML tables with Bootstrap styling
-Current version: 1.12.0 / 2.0.1
+Current version: 1.12.0 / 2.1.0
 
 Sorting provided by [TinySort](https://github.com/Sjeiti/TinySort).
 Date parsing provided by [moment.js](https://github.com/timrwood/moment/).
