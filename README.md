@@ -15,10 +15,10 @@ For compatibility issues with older browsers and possible workarounds, please lo
 
 In version 2, the parameters to `$.bootstrapSortable` function were changed to single Object. For basic compatibility, you can still use single Boolean parameter (applyLast), other parameters are passed as properties of the Object.
 
-####Dependencies:
+#### Dependencies:
 You should add the provided "moment.js" library, or get yourself a copy from http://momentjs.com.
 
-####Basic usage:
+#### Basic usage:
 
 Add references to bootstrap-sortable.css and bootstrap-sortable.js to your page. Add class "sortable" to your bootstrap table.
 HTML table has to be properly formated, using `<thead>`, `<th>` and `<tbody>` elements.
@@ -30,17 +30,17 @@ Use optional paramater `applyLast=true` if you want to preserve the last used so
 
 After sorting a column, the table triggers an event `sorted`.
 
-####Cell with `colspan` and multiple header rows:
+#### Cell with `colspan` and multiple header rows:
 When you have multiple header rows, all header cells in the same column can be used to sort that column.
 
 Cells with `colspan` can also be used for sorting. When not specified, the first column of the colspan will be used for sorting. You can override this by using `data-mainsort` attribute. (Use zero-based index as the value, `data-mainsort='1'` will sort the second column of the span.)
 
 If this cell is in the last row of the header, the sorting will be done according to this cell. If there is another row below, the cell in this row will be used. (i.e. the sorting sign, default-sort setting...)
 
-#####!BREAKING CHANGE!
+##### !BREAKING CHANGE!
 This changes the previous behaviour, where it only worked if the `colspan` cell was not in the last row and the `mainsort` had to be set on the cell in the next row. Now the `mainsort` is set on the `colspan` cell.
 
-####Sorting direction signs:
+#### Sorting direction signs:
 You can choose the sign that show the sort direcion. Default is the arrow pointing towards the higher value.
 
 This proved to be counterintuitive for some, so you can change it to opposite using the second parameter: `$.bootstrapSortable({ sign: 'reversed' })`.
@@ -49,12 +49,12 @@ Other possible values are `'az'`, `'AZ'`, `'_19'`, `'month'`. (See [demo](http:/
 
 You can set individual signs for each column using `data-defaultsign` attribute in the `<th>` element.
 
-#####Alternative way of styling the sorting signs:
+##### Alternative way of styling the sorting signs:
 Set `data-defaultsign='nospan'` and set a `class` on `<th>` elements. Then the sorting signs will be shown using `:after` pseudoelement on `<th>`. This can be seen on the first column in the demo page.
 For this purpose, sorted column headers have classes `up`, `down` and `nosort` respectively and all previous styles are supported.
 You can also do your own styling in `css`.
 
-####Optional attributes:
+#### Optional attributes:
 
 You can preset one column to be sorted when table is loaded using `data-defaultsort` attribute:
 ```html
