@@ -45,7 +45,7 @@ You can choose the sign that show the sort direcion. Default is the arrow pointi
 
 This proved to be counterintuitive for some, so you can change it to opposite using the second parameter: `$.bootstrapSortable({ sign: 'reversed' })`.
 
-Other possible values are `'az'`, `'AZ'`, `'_19'`, `'month'`. (See [demo](http://htmlpreview.github.io/?https://github.com/drvic10k/bootstrap-sortable/blob/gh-pages/index.html) to see how it looks.)
+Other possible values are `'az'`, `'AZ'`, `'_19'`, `'month'`. (See [demo](http://drvic10k.github.io/bootstrap-sortable/index.html) to see how it looks.)
 
 You can set individual signs for each column using `data-defaultsign` attribute in the `<th>` element.
 
