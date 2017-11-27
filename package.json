@@ -2,6 +2,7 @@
   "name": "bootstrap-sortable",
   "version": "1.11.2",
   "description": "adding sorting ability to HTML tables",
+  "main": "Scripts/bootstrap-sortable.js",
   "scripts": {
     "test": "karma start karma.conf.js --single-run"
   },
