@@ -25,6 +25,8 @@ HTML table has to be properly formated, using `<thead>`, `<th>` and `<tbody>` el
 
 You can disable sorting for a column by using `data-defaultsort='disabled'` attribute in the `<th>` element.
 
+You can disable sorting for a row by using `data-disablesort='true'` attribute in the `<tr>` element.
+
 When you add table rows or whole table from client side, use `$.bootstrapSortable({ applyLast: true })` function to add sortability to parts/tables that were not present at document.ready.
 Use optional paramater `applyLast=true` if you want to preserve the last used sorting.
 
