@@ -1,5 +1,9 @@
 [![Build Status](https://travis-ci.org/drvic10k/bootstrap-sortable.svg?branch=master)](https://travis-ci.org/drvic10k/bootstrap-sortable)
 
+If you like the plugin, you can send tips here
+
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=M8EBWZL2QHN7Y&currency_code=EUR&source=url)
+
 bootstrap-sortable
 ==================
 adding sorting ability to HTML tables with Bootstrap styling
