@@ -198,7 +198,7 @@
     }
 
     // Add click event to table header
-    $document.on('click', 'table.sortable>thead th[data-defaultsort!="disabled"]', function (e) {
+    $document.on('click', 'table.sortable>thead th[data-defaultsort!="disabled"][data-disableclick!="true"]', function (e) {
         sortByColumn(this);
     });
 
