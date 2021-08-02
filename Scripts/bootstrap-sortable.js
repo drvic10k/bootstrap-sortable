@@ -295,7 +295,7 @@
         }
 
         // remove rows that should not be sorted
-        var rows = $table.children('tbody').children('tr');
+        var rows = $table.children('tbody').find('tr');
         var fixedRows = [];
         $(rows.filter('[data-disablesort="true"]').get().reverse()).each(function (index, fixedRow) {
             var $fixedRow = $(fixedRow);
